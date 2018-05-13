@@ -1,5 +1,13 @@
 // look up phaser keyboard stuff
 var Inputs = {};
+var gameOptions = {
+	playerGravity: 900, 
+	playerSpeed: 200,
+	playerJump: 400,
+	playerForce: 200
+}
+var counter = 0;  // variable for jump
+var inAir = false;  // variable to detect if in the air
 
 Inputs.menu = function() {};
 Inputs.menu.prototype = {
@@ -47,11 +55,12 @@ Inputs.play.prototype = {
         this.plt = this.add.sprite(0, 490, 'ground', 'platform'); //its called platform on leshy
         this.plt2 = this.add.sprite(400, 490, 'ground', 'platform');
         this.plt3 = this.add.sprite(500, 150, 'ground', 'platform');
-        this.plt4 = this.add.sprite(375, 150, 'ground', 'platform');
+        this.plt4 = this.add.sprite(350, 150, 'ground', 'platform');
         this.plt3.anchor.setTo(0.5, 0.5);
         this.plt4.anchor.setTo(0.5, 0.5);
         this.plt3.scale.setTo(0.1, 50);
         this.plt4.scale.setTo(0.1, 15);
+        this.player.anchor.setTo(0.5);
 
 		this.playerIdleLeft = false;
 		this.playerIdleRight = false;
@@ -61,16 +70,21 @@ Inputs.play.prototype = {
         this.physics.arcade.enable([this.player, this.plt, this.plt2, this.plt3, this.plt4]);
         this.player.animations.add('walk', [15, 11, 16, 10], 10, true);
         this.player.animations.add('walkD', [15], 10, true);
-        this.player.animations.add('walk1', [8, 12, 9, 13], 10, true);
-        this.player.animations.add('walk1D', [8, 12, 9, 13], 30, true);
         this.player.animations.add('jump', [11, 10], 10, false);
 		this.plt.body.immovable = true;
 		this.plt2.body.immovable = true;
 		this.plt3.body.immovable = true;
 		this.plt4.body.immovable = true;
-		this.player.body.gravity.y = 5000;
+
+
+		// sets player gravity
+		this.player.body.gravity.y = gameOptions.playerGravity;
+
+	
 		//this.plt3.angle = 90;
 	},
+
+
 	update: function(){
 		// run game loop
 		var hitPlatform = this.physics.arcade.collide(this.player, this.plt);
@@ -78,48 +92,74 @@ Inputs.play.prototype = {
 		var hitPlatform3 = this.physics.arcade.collide(this.player, this.plt3);
 		var hitPlatform4 = this.physics.arcade.collide(this.player, this.plt4);
 		// player does not have actual image/sprite attached to it yet
-		this.player.body.velocity.x = 0;
-		this.player.body.maxVelocity.x = 300;
-	
+
+		//stops player velocity after jumping
+		if (this.player.body.touching.down) {
+			inAir = false;
+			this.player.body.velocity.x = 0;
+		} 
+
+		//running animsation for left and right movement
 		if(this.input.keyboard.isDown(Phaser.Keyboard.LEFT) && this.player.body.touching.down){
-			this.player.body.velocity.x = -300;
-			this.player.animations.play('walk1');
-		} else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && this.player.body.touching.down){
-			this.player.body.velocity.x = 300;
+		    this.player.scale.x = -1;
+			this.player.body.velocity.x = -gameOptions.playerSpeed;
 			this.player.animations.play('walk');
-		} //else if (this.input.keyboard.isDown(Phaser.Keyboard.R)){
+		} else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && this.player.body.touching.down){
+			this.player.scale.x = 1;
+			this.player.body.velocity.x = gameOptions.playerSpeed;
+			this.player.animations.play('walk');
+		} 
+
+		//else if (this.input.keyboard.isDown(Phaser.Keyboard.R)){
 			//this.player.body.velocity.x = 1000;
 			//this.player.animations.play('walkD');
 			//this.player.arcade.disable(this.player);
 		//}
+
+
+		//stops velocity and animation when releasing button  for the right
 		if (this.input.keyboard.justReleased(Phaser.Keyboard.RIGHT)){
-			this.player.animations.stop();
+			if(inAir == false) {
+				this.player.animations.stop();
+				this.player.body.velocity.x = 0;
+			} // stops it for the left
 		} else if (this.input.keyboard.justReleased(Phaser.Keyboard.LEFT)){
-			this.player.animations.stop();
-		} else if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !this.player.body.touching.down){
-			this.player.body.acceleration.x = -300;
+			if(inAir == false) {
+				this.player.animations.stop();
+				this.player.body.velocity.x = 0;
+			}
+		} 
+
+		// resets the jump counter
+		if (this.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR)) {
+				counter = 0;
+		}
+
+		// uses spacebar to jump, Must release spacebar to jump again instead of holding down
+		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.touching.down && counter < 1) {
+			this.player.body.velocity.y = -gameOptions.playerJump;
+			inAir = true;
+			counter ++;
+		}
+
+		//Wall Jump Right
+		//Checks if player is in Air, holding right against all to the right,
+		// and if player is touching wall
+		if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && inAir == true && this.player.body.touching.right ) {
+			this.player.scale.x *= -1;
+			this.player.body.velocity.y = -gameOptions.playerJump;
+			this.player.body.velocity.x = -gameOptions.playerForce;
+		}
+
+		//Wall jump Left
+		//Same as above but for the left wall and holding left
+		if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT) && inAir == true && this.player.body.touching.left ) {
+			this.player.scale.x *= -1;
+			this.player.body.velocity.y = -gameOptions.playerJump;
+			this.player.body.velocity.x = gameOptions.playerForce;
 		}
 
 
-		if(this.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && this.player.body.touching.down){
-			this.player.body.velocity.y -= 1700;
-		}
-
-		if(this.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && hitPlatform3){
-			//this.player.body.gravity.y = 10000;
-			this.player.body.velocity.x -= 300;
-			this.player.body.velocity.y = -1500;
-		}
-		if(this.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && hitPlatform4){
-			this.player.body.velocity.x += 300;
-			this.player.body.velocity.y -= 1500;
-		}
-
-		if(this.player.body.x >= game.width){
-			this.player.body.x = -10;
-		}else if (this.player.body.x <= -10) {
-			this.player.body.x = game.width;
-		}
 		/* 
 		//	Basic code, not tested yet so it will stay commented out
 		if(cursors.spacebar.isDown && dashBar != 0 && playerIdleRight = true){
@@ -138,14 +178,12 @@ Inputs.play.prototype = {
 			player.body.velocity.x -= 10;
 			dashBar -= 3;
 		}
-
 		if(player.touching.wall == true && cursors.up.justPressed(cursors.up)){
 			player.body.velocity.y -= 5;
 		} else {
 			// after 2 seconds
 			// player.touching.wall = false;
 		}
-
 		if (dashBar = 0){
 			// player cannot dash
 		}*/
