@@ -7,6 +7,7 @@ Inputs.menu.prototype = {
 	    // load some stuff
 	    this.load.path = 'assets/img/';
 	    this.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
+	    this.load.atlas('player', 'player.png', 'player.json');
 		this.load.atlas('ground', 'ground.png', 'ground.json');
 	},
 	create: function(){
@@ -42,7 +43,7 @@ Inputs.play.prototype = {
         //	Sprites
         this.bg = this.add.sprite(0, 0, 'atlas', 'clouds');
         this.bg = this.add.sprite(0, 250, 'atlas', 'clouds');
-        this.player = this.add.sprite(50, 450, 'atlas', 'dude5');
+        this.player = this.add.sprite(50, 450, 'player', 'rightIdle');
         this.plt = this.add.sprite(0, 490, 'ground', 'platform'); //its called platform on leshy
         this.plt2 = this.add.sprite(400, 490, 'ground', 'platform');
 
@@ -52,9 +53,12 @@ Inputs.play.prototype = {
 		//  Add the animation for walking
         //  15 = right hand out, 16 = left hand out. 10 and 11 are the idle right
         this.physics.arcade.enable([this.player, this.plt, this.plt2]);
-        this.player.animations.add('walk', [15, 11, 16, 10], 10, true);
-        this.player.animations.add('walk1', [8, 12, 9, 13], 10, true);
-        this.player.animations.add('jump', [11, 10], 10, false);
+        this.player.animations.add('rightRun', Phaser.Animation.generateFrameNames('rightRun', 1, 8), 10, true);
+        this.player.animations.add('leftRun', Phaser.Animation.generateFrameNames('leftRun', 1, 8), 10, true);
+        this.player.animations.add('rightIdle', Phaser.Animation.generateFrameNames('rightIdle'), 1, true);
+        this.player.animations.add('leftIdle', Phaser.Animation.generateFrameNames('leftIdle'), 1, true);
+        this.player.animations.add('rightJump', Phaser.Animation.generateFrameNames('rightJump'), 1, true);
+        this.player.animations.add('leftJump', Phaser.Animation.generateFrameNames('leftJump'), 1, true);
 		this.player.collideWorldBounds = true;
 		this.plt.body.immovable = true;
 		this.plt2.body.immovable = true;
@@ -70,14 +74,14 @@ Inputs.play.prototype = {
 	
 		if(this.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 			this.player.body.velocity.x = -100;
-			this.player.animations.play('walk1');
+			this.player.animations.play('leftRun');
 		} else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 			this.player.body.velocity.x = 100;
-			this.player.animations.play('walk');
+			this.player.animations.play('rightRun');
 		} else if (this.input.keyboard.justReleased(Phaser.Keyboard.RIGHT)){
-			this.player.animations.stop();
+			this.player.animations.play('rightIdle');
 		} else if (this.input.keyboard.justReleased(Phaser.Keyboard.LEFT)){
-			this.player.animations.stop();
+			this.player.animations.play('leftIdle');
 		}
 
 
