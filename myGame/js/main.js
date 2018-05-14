@@ -8,6 +8,9 @@ var gameOptions = {
 }
 var counter = 0;  // variable for jump
 var inAir = false;  // variable to detect if in the air
+var timer;
+var tim;
+var timeText;
 
 Inputs.menu = function() {};
 Inputs.menu.prototype = {
@@ -20,6 +23,8 @@ Inputs.menu.prototype = {
 	},
 	create: function(){
 		// do some stuff
+		this.add.text(225, 240, 'Press Spacebar to begin');
+		this.add.text(250, 280, 'Collect the Diamond');
 		this.stage.backgroundColor = '#facade';
 	},
 	update: function(){
@@ -36,10 +41,12 @@ Inputs.play = function(game){
 	this.cursors = null;
 	this.bg = null;
 	this.bg2 = null;
-	//this.gravity = 10;
 	this.plt;
 	this.plt2;
 	this.wall;
+	this.dmnd;
+	this.dgravity = 200;
+	this.total = 0;
 };
 Inputs.play.prototype = {
 	preload: function(){
@@ -48,13 +55,18 @@ Inputs.play.prototype = {
 	create: function(){
 		//  Enable physics system
         this.physics.startSystem(Phaser.Physics.ARCADE);
+        game.camera.follow(this.player);
+
+        timer = this.time.create(false);
+        timer.loop(1000, this.updateTime, this);
+        timer.start();
 
         //	Sprites
         this.bg = this.add.sprite(0, 0, 'atlas', 'clouds');
         this.bg = this.add.sprite(0, 250, 'atlas', 'clouds');
         this.player = this.add.sprite(50, 300, 'player', 'rightIdle');
         this.player.scale.setTo(0.3);
-        this.plt = this.add.sprite(0, 490, 'ground', 'platform'); //its called platform on leshy
+        this.plt = this.add.sprite(0, 490, 'ground', 'platform');      //its called platform on leshy
         this.plt2 = this.add.sprite(400, 490, 'ground', 'platform');
         this.plt3 = this.add.sprite(500, 400, 'ground', 'platform');
         this.plt4 = this.add.sprite(350, 250, 'ground', 'platform');
@@ -63,13 +75,14 @@ Inputs.play.prototype = {
         this.plt3.scale.setTo(0.1, 20);
         this.plt4.scale.setTo(0.1, 10);
         this.player.anchor.setTo(0.5);
+        this.dmnd = this.add.sprite(700, 200, 'atlas', 'diamond');
 
 		this.playerIdleLeft = false;
 		this.playerIdleRight = false;
 
 		//  Add the animation for walking
         //  15 = right hand out, 16 = left hand out. 10 and 11 are the idle right
-        this.physics.arcade.enable([this.player, this.plt, this.plt2, this.plt3, this.plt4]);
+        this.physics.arcade.enable([this.player, this.plt, this.plt2, this.plt3, this.plt4, this.dmnd]);
         this.player.animations.add('rightRun', Phaser.Animation.generateFrameNames('rightRun', 1, 8), 10, true);
         this.player.animations.add('leftRun', Phaser.Animation.generateFrameNames('leftRun', 1, 8), 10, true);
 		this.plt.body.immovable = true;
@@ -79,10 +92,11 @@ Inputs.play.prototype = {
 		this.player.body.collideWorldBounds = true;
 
 
-		// sets player gravity
+		// sets sprite properties
 		this.player.body.gravity.y = gameOptions.playerGravity;
+		this.dmnd.body.gravity.y = this.dgravity;
+		this.dmnd.body.bounce.y = 0.2;
 
-	
 		//this.plt3.angle = 90;
 	},
 
@@ -93,7 +107,8 @@ Inputs.play.prototype = {
 		var hitPlatform2 = this.physics.arcade.collide(this.player, this.plt2);
 		var hitPlatform3 = this.physics.arcade.collide(this.player, this.plt3);
 		var hitPlatform4 = this.physics.arcade.collide(this.player, this.plt4);
-		// player does not have actual image/sprite attached to it yet
+		var hitPlt2 = this.physics.arcade.collide(this.plt2, this.dmnd);
+		this.physics.arcade.overlap(this.player, this.dmnd, this.endGame, null, this);
 
 		//stops player velocity after jumping
 		if (this.player.body.touching.down) {
@@ -174,7 +189,6 @@ Inputs.play.prototype = {
 			this.player.body.velocity.x = gameOptions.playerForce;
 		}
 
-
 		/* 
 		//	Basic code, not tested yet so it will stay commented out
 		if(cursors.spacebar.isDown && dashBar != 0 && playerIdleRight = true){
@@ -202,6 +216,16 @@ Inputs.play.prototype = {
 		if (dashBar = 0){
 			// player cannot dash
 		}*/
+	},
+	render: function() {
+		// show timer01 debug text
+		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
+	},
+	endGame: function(){
+		this.state.start('gameover', true, false);
+	},
+	updateTime: function(){
+		this.total++;
 	}
 }	
 
@@ -212,9 +236,12 @@ Inputs.gameover.prototype = {
 	},
 	create: function(){
 		cursors = game.input.keyboard.createCursorKeys();
+		this.add.text(250, 275, 'Congratulations!');
+		this.add.text(90, 325, 'You have completed the really early Alpha build.',);
+		this.stage.backgroundColor = '#b3d1ff';
 	},
 	update: function(){
-		if(cursors.spacebar.isDown){
+		if(this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			game.state.start('menu');
 		}
 	}
