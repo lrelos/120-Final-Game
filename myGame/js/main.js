@@ -46,7 +46,7 @@ Inputs.play = function(game){
 	this.wall;
 	this.dmnd;
 	this.dgravity = 200;
-	this.total = 0;
+	this.total;
 };
 Inputs.play.prototype = {
 	preload: function(){
@@ -57,6 +57,7 @@ Inputs.play.prototype = {
         this.physics.startSystem(Phaser.Physics.ARCADE);
         game.camera.follow(this.player);
 
+        this.total = 0;
         timer = this.time.create(false);
         timer.loop(1000, this.updateTime, this);
         timer.start();
