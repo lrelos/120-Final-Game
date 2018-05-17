@@ -20,6 +20,7 @@ Inputs.menu.prototype = {
 	    this.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
 	    this.load.atlas('player', 'player.png', 'player.json');
 		this.load.atlas('ground', 'ground.png', 'ground.json');
+		this.load.audio('bgMusic', ['../audio/Ninja_Background.mp3']);
 	},
 	create: function(){
 		// do some stuff
@@ -55,7 +56,12 @@ Inputs.play.prototype = {
 	create: function(){
 		//  Enable physics system
         this.physics.startSystem(Phaser.Physics.ARCADE);
-        game.camera.follow(this.player);
+        //game.camera.follow(this.player);
+
+        //	Research how to delay the game so that the music can start up right away.
+        this.music = this.add.audio('bgMusic');
+        this.music.play();
+        this.music.loop;
 
         this.total = 0;
         timer = this.time.create(false);
@@ -224,6 +230,7 @@ Inputs.play.prototype = {
 	},
 	endGame: function(){
 		this.state.start('gameover', true, false);
+		this.music.stop();
 	},
 	updateTime: function(){
 		this.total++;
