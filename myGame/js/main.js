@@ -20,7 +20,7 @@ Inputs.menu.prototype = {
 	    this.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
 	    this.load.atlas('player', 'player.png', 'player.json');
 		this.load.atlas('ground', 'ground.png', 'ground.json');
-		this.load.audio('bgMusic', ['../audio/Ninja_Background.mp3']);
+		this.load.audio('bgMusic', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
 	},
 	create: function(){
 		// do some stuff
