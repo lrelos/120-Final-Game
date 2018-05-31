@@ -45,6 +45,8 @@ Player.prototype.update = function() {
     //stops player velocity after jumping
         if (this.body.touching.down) {
             inAir = false;
+            wallJumpLeft = false;
+            wallJumpRight = false;
             this.body.velocity.x = 0;
             if (this.scale.x < 0) {
                 this.scale.x *= -1;
@@ -82,16 +84,16 @@ Player.prototype.update = function() {
         } 
 
         if(inAir){
-            if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-                if (this.scale.x < 0) {
-                    this.scale.x *= -1;
-                }
+            if(this.body.velocity.x <0){
+                //if (this.scale.x < 0) {
+                //    this.scale.x *= -1;
+                //}
                 this.animations.stop();
                 this.frameName = 'leftJump';
-            }else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-                if (this.scale.x < 0) {
-                    this.scale.x *= -1;
-                }       
+            }else if (this.body.velocity.x >0){
+                //if (this.scale.x < 0) {
+                //    this.scale.x *= -1;
+                //}       
                 this.animations.stop();
                 this.frameName = 'rightJump';
             }
@@ -118,18 +120,20 @@ Player.prototype.update = function() {
         // Wall Jump Right
         // Checks if player is in Air, holding right against all to the right,
         // and if player is touching wall
-        if (inAir && this.body.touching.right) {
+        if(inAir){
+        if (this.body.touching.right) {
             jumpTime = game.time.time + 500;
             wallJumpRight = true;
 
-        } else if(inAir && this.body.touching.left) {
+        } else if(this.body.touching.left) {
             jumpTime = game.time.time + 500;
             wallJumpLeft = true;
         }
+    }
 
         //Wall jump Right
-        if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && game.time.time < jumpTime) {
-            this.scale.x *= -1;
+        if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            this.frameName = 'leftJump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x = -gameOptions.playerForce;
             wallJumpRight = false;
@@ -138,8 +142,8 @@ Player.prototype.update = function() {
     
 
         //Wall jump Left
-         if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && game.time.time < jumpTime) {
-            this.scale.x *= -1;
+         if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            this.frameName = 'rightJump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x =  gameOptions.playerForce;
             wallJumpLeft = false;
