@@ -71,12 +71,12 @@ Player.prototype.update = function() {
 
         //running animsation for left and right movement
         if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-        	if(!inAir || (inAir && game.time.time > jumpTime)){
+        	if(!inAir){
             	this.body.velocity.x = -gameOptions.playerSpeed;
             	if (!inAir) this.animations.play('run');
             }
         } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-        	if(!inAir || (inAir && game.time.time > jumpTime)){
+        	if(!inAir){
             	this.body.velocity.x = gameOptions.playerSpeed;
             	if (!inAir) this.animations.play('run');
             }
@@ -114,32 +114,17 @@ Player.prototype.update = function() {
         // Checks if player is in Air, holding right against all to the right,
         // and if player is blocked wall
         if(inAir){
-        if (this.body.blocked.right || this.body.touching.right) {
-        	this.animations.stop();
-            wallJumpRight = true;
-            this.frameName = 'wallCling'
-        } else if(this.body.blocked.left || this.body.touching.left) {
-        	this.animations.stop();
-            wallJumpLeft = true;
-            this.frameName = 'wallCling'
+            if (this.body.blocked.right || this.body.touching.right) {
+        	    this.animations.stop();
+                wallJumpRight = true;
+                this.frameName = 'wallCling'
+            } else if(this.body.blocked.left || this.body.touching.left) {
+        	   this.animations.stop();
+                wallJumpLeft = true;
+                this.frameName = 'wallCling'
+            }
         }
 
-        	if (this.body.touching.right) {
-        		this.animations.stop();
-            	wallJumpRight = true;
-            	this.frameName = 'wallCling'
-        	} else if(this.body.touching.left) {
-        		this.animations.stop();
-            	wallJumpLeft = true;
-            	this.frameName = 'wallCling'
-        	}
-		}
-
-		if((wallJumpRight && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || wallJumpLeft && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			this.frameName = 'jump';
-			wallJumpRight = false;
-			wallJumpLeft = false;
-		}
 
         //Wall jump Right
         if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
