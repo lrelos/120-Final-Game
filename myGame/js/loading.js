@@ -1,9 +1,9 @@
   loading = {
 	init: function(){
 		// going fullscreen
-		game.scale.pageAlignHorizontally = true;
-		game.scale.pageAlignVertically = true;
-		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		//game.scale.pageAlignHorizontally = true;
+		//game.scale.pageAlignVertically = true;
+		//game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		//game.scale.setScreenSize(true);
 	},
 	preload: function(){
