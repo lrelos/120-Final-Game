@@ -71,12 +71,12 @@ Player.prototype.update = function() {
 
         //running animsation for left and right movement
         if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-        	if(!inAir){
+        	if(!inAir || (inAir && game.time.time > jumpTime)){
             	this.body.velocity.x = -gameOptions.playerSpeed;
             	if (!inAir) this.animations.play('run');
             }
         } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-        	if(!inAir){
+        	if(!inAir || (inAir && game.time.time > jumpTime)){
             	this.body.velocity.x = gameOptions.playerSpeed;
             	if (!inAir) this.animations.play('run');
             }
@@ -124,10 +124,14 @@ Player.prototype.update = function() {
                 this.frameName = 'wallCling'
             }
         }
-
+        if((wallJumpRight && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || wallJumpLeft && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+            this.frameName = 'jump';
+            wallJumpRight = false;
+            wallJumpLeft = false;
+        }
 
         //Wall jump Right
-        if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+        if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
             this.frameName = 'jump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x = -gameOptions.playerForce;
@@ -136,7 +140,7 @@ Player.prototype.update = function() {
         }
 
         //Wall jump Left
-         if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+         if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
             this.frameName = 'jump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x =  gameOptions.playerForce;
