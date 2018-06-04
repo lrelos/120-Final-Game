@@ -81,11 +81,9 @@ Inputs.play.prototype = {
         timer.loop(1000, this.updateTime, this);
         timer.start();
 
-
         //	Sprites
         this.bg = this.add.sprite(0, 0, 'Mnt', 'mountain');
         //this.bg = this.add.sprite(0, 250, 'atlas', 'clouds');
-
 
         //creates a player using the Player prefab
         this.player = new Player(game, 100, 300); //100, 300
@@ -222,6 +220,10 @@ Inputs.play.prototype = {
 		this.txt02 = this.add.text(140, 1250, "Nothing Here!");
 		this.txt03 = this.add.text(140, 1362, "Go back.");
 		this.txt04 = this.add.text(2000, 1570, "This is da wae, now start jumping to win!");
+
+		this.dashBar = this.add.sprite(20, 60, 'dashBar');
+		this.dashBar.scale.y = 0.5;
+		this.dashBar.fixedToCamera = true;
 	},
 
 
@@ -278,7 +280,8 @@ Inputs.play.prototype = {
 	render: function() {
 		// show timer01 debug text
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
-		game.debug.text('Stars: ' + stars, 50, 50, "#000000", '72px');
+		game.debug.text('Dash: ' + this.player.inAir, 50, 50, "#000000", '72px');
+        this.dashBar.scale.x = 1;
 	},
 	endGame: function(){
 		this.state.start('gameover', true, false);
