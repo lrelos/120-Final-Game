@@ -115,7 +115,7 @@ levelSelect = {
 		// the level is playable, then play the level!!
 		if(button.frame < 4){
 			game.global.level = button.levelNumber;
-			game.state.start("play");
+			game.state.start("lvl"+ (game.global.level));
 		}
 		// else, let's shake the locked levels
 		else{

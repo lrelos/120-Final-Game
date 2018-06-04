@@ -9,6 +9,7 @@ var bronzeTime = 90;
 var silverTime = 60;
 var goldTime = 35;
 var stars = 0;
+var numofLevel = 2;
 
 //global vars for level select menu
 game.global = {
@@ -70,7 +71,7 @@ Inputs.play.prototype = {
 		//  Enable physics system
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-        //	Research how to delay the game so that the music can start up right away.
+        //	Plays Background music
         this.music = this.add.audio('bgMusic');
         this.music.play();
         this.music.loop;
@@ -320,6 +321,7 @@ Inputs.gameover.prototype = {
 game.state.add("Loading", loading);
 game.state.add("menu", Inputs.menu);
 game.state.add("LevelSelect", levelSelect);
-game.state.add("play", Inputs.play);
+game.state.add("lvl1", Inputs.play);
 game.state.add("gameover", Inputs.gameover);
+game.state.add("lvl2", Level2);
 game.state.start("Loading");

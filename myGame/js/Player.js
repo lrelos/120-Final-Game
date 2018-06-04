@@ -1,10 +1,10 @@
 
 var gameOptions = {
-    playerGravity: 900, 
+    playerGravity: 925, 
     playerSpeed: 200,
     playerJump: 400,
-    playerWallJump: 400,
-    playerForce: 225
+    playerWallJump: 475,
+    playerForce: 250
 }
 
 var jumpButtonDown = false;
@@ -24,7 +24,7 @@ function Player(game, x, y, frame) {
 	// add properties
     game.physics.arcade.enable(this);
 
-    this.body.collideWorldBounds = true;
+    this.body.collideWorldBounds = false;
     this.body.gravity.y = gameOptions.playerGravity;
     this.frameName = 'jump';
 }
@@ -45,7 +45,7 @@ Player.prototype.update = function() {
 		}
 
     //stops player velocity after jumping
-        if (this.body.touching.down) {
+        if (this.body.blocked.down || this.body.touching.down) {
             inAir = false;
             wallJumpLeft = false;
             wallJumpRight = false;
@@ -80,7 +80,7 @@ Player.prototype.update = function() {
         }
 
         // Can only jump once while  on top of a platform
-        if (this.body.touching.down && !inAir) {
+        if ((this.body.blocked.down || this.body.touching.down) && !inAir) {
             if(!jumpButtonDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             	this.animations.stop();
             	this.frameName = 'jump';
@@ -97,13 +97,13 @@ Player.prototype.update = function() {
         // Wall jump solution 1
         // Wall Jump Right
         // Checks if player is in Air, holding right against all to the right,
-        // and if player is touching wall
+        // and if player is blocked wall
         if(inAir){
-        if (this.body.touching.right) {
+        if (this.body.blocked.right || this.body.touching.right) {
         	this.animations.stop();
             wallJumpRight = true;
             this.frameName = 'wallCling'
-        } else if(this.body.touching.left) {
+        } else if(this.body.blocked.left || this.body.touching.left) {
         	this.animations.stop();
             wallJumpLeft = true;
             this.frameName = 'wallCling'
@@ -111,7 +111,7 @@ Player.prototype.update = function() {
 }
 
         //Wall jump Right
-        if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+        if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
             this.frameName = 'jump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x = -gameOptions.playerForce;
@@ -121,7 +121,7 @@ Player.prototype.update = function() {
     
 
         //Wall jump Left
-         if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+         if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
             this.frameName = 'jump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x =  gameOptions.playerForce;

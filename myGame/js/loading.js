@@ -16,6 +16,9 @@
 	    game.load.atlas('ninja', 'ninja.png', 'ninja.json');
 		game.load.atlas('ground', 'ground.png', 'ground.json');
 		game.load.audio('bgMusic', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
+
+		game.load.image('sandTiles', '../level2/sheet.png');
+		game.load.tilemap('Level2', '../level2/Level2.json', null, Phaser.Tilemap.TILED_JSON);
 	},
   	create: function(){
   		// going to level select state
