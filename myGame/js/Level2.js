@@ -21,7 +21,8 @@ Level2 = {
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 	
-		game.stage.backgroundColor = '#000000';
+	    this.background = game.add.tileSprite(0, 0, 2450, 1750, 'lvl2Background');
+		//game.stage.backgroundColor = '#FFF000';
 
 		lvl2Map = game.add.tilemap('Level2');
 
