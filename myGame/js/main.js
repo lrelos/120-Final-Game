@@ -279,9 +279,10 @@ Inputs.play.prototype = {
 	},
 	render: function() {
 		// show timer01 debug text
+		var dash = this.player.getDash();
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
-		game.debug.text('Dash: ' + this.player.inAir, 50, 50, "#000000", '72px');
-        this.dashBar.scale.x = 1;
+		game.debug.text('Stars :' + stars, 50, 50, "#000000", '72px');
+        this.dashBar.scale.x = dash*(1/90);
 	},
 	endGame: function(){
 		this.state.start('gameover', true, false);

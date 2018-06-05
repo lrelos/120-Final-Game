@@ -154,7 +154,7 @@ Player.prototype.update = function() {
 
         // Checks to see if either the right arrow or left arrow have been pressed 
         // so that the dash can done
-        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
             this.body.velocity.x = -gameOptions.playerDash;
             this.body.velocity.y = 0;
@@ -164,8 +164,8 @@ Player.prototype.update = function() {
             	this.frameName = 'run2';
             }
             invincible = true;
-            //dashBar -= 1;
-        } else if (game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+            dash -= 1;
+        } else if (game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.body.velocity.y = 0;
             this.body.velocity.x = gameOptions.playerDash;
@@ -175,8 +175,8 @@ Player.prototype.update = function() {
             	this.frameName = 'run2';
             }
             invincible = true;
-            //dashBar -= 1;
-        }else if(game.input.keyboard.isDown(Phaser.Keyboard.D) && this.scale.x < 0){
+            dash -= 1;
+        }else if(game.input.keyboard.isDown(Phaser.Keyboard.D) && this.scale.x < 0 && dash >0){
         	wallJumpRight = wallJumpLeft = false;
             this.body.velocity.x = -gameOptions.playerDash;
             this.body.velocity.y = 0;
@@ -186,8 +186,8 @@ Player.prototype.update = function() {
             	this.frameName = 'run2';
             }
             invincible = true;
-            //dashBar -= 1;
-        } else if (game.input.keyboard.isDown(Phaser.Keyboard.D) && this.scale.x > 0){
+            dash -= 1;
+        } else if (game.input.keyboard.isDown(Phaser.Keyboard.D) && this.scale.x > 0 && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.body.velocity.y = 0;
             this.body.velocity.x = gameOptions.playerDash;
@@ -197,65 +197,71 @@ Player.prototype.update = function() {
             	this.frameName = 'run2';
             }
             invincible = true;
-            //dashBar -= 1;
+            dash -= 1;
         }
 
-        if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.D)){
+        if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.body.gravity.y = 0;
             this.body.velocity.y = -gameOptions.playerDash; 
             this.body.velocity.x = 0;
             this.frameName = 'dashUp';
             invincible = true;
+            dash -= 1;
         }
 
-        if (inAir && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.D)){
+        if (inAir && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.body.gravity.y = 0;
             this.body.velocity.y = gameOptions.playerDash;
             this.body.velocity.x = 0; 
             this.frameName = 'dashDown';
             invincible = true;
+            dash -= 1;
         }
         // this is the wip dash code for diagonal down to the right
-        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && inAir){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && inAir && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashDown';
         	this.body.gravity.y = 0;
              this.body.velocity.x = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              this.body.velocity.y = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              invincible = true;
+             dash -= 1;
         }
 
-        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && inAir){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && inAir && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashDown';
         	this.body.gravity.y = 0;
              this.body.velocity.x = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              this.body.velocity.y = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              invincible = true;
+             dash -=1;
         }
 
-        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashUp';
         	this.body.gravity.y = 0;
              this.body.velocity.x = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              this.body.velocity.y = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              invincible = true;
+             dash -=1;
         }
 
-        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashUp';
         	this.body.gravity.y = 0;
              this.body.velocity.x = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              this.body.velocity.y = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              invincible = true;
+             dash -= 1;
         }
 
         // Stops the running animation after the dash button is released 
-        if(game.input.keyboard.justReleased(Phaser.Keyboard.D)){
+        if(game.input.keyboard.justReleased(Phaser.Keyboard.D) || (game.input.keyboard.isDown(Phaser.Keyboard.D) && dash <= 0)){
         	invincible = false;
         	this.body.gravity.y = gameOptions.playerGravity;
         	if(inAir){
@@ -264,9 +270,18 @@ Player.prototype.update = function() {
         		}else{
         			this.frameName = 'jump';
         		}
-        	}else{
+        	}else if(this.body.velocity.x == 0){
         		this.frameName = 'idle';
         	}
         }
 
+        if(dash <= 0) dash=0;
+        if(dash >=90) dash=90;
+
+        if(game.input.keyboard.isDown(Phaser.Keyboard.P)) dash += 2;
+
+}
+
+Player.prototype.getDash = function() {
+    return dash;
 }

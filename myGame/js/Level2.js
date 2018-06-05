@@ -1,3 +1,5 @@
+var dashBar = null;
+
 Level2 = {
 	create: function() {
 
@@ -46,7 +48,9 @@ Level2 = {
         //Phaser.Camera.FOLLOW_PLATFORMER = 1;
         game.camera.follow(this.player);
 
-
+		this.dashBar = this.add.sprite(20, 60, 'dashBar');
+		this.dashBar.scale.y = 0.5;
+		this.dashBar.fixedToCamera = true;
 
 	},
 
@@ -70,6 +74,7 @@ Level2 = {
 		// show timer01 debug text
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
 		game.debug.text('Stars: ' + this.stars, 50, 50, "#FFFFFF", '72px');
+		this.dashBar.scale.x = dash*(1/90);
 	},
 
 	updateTime: function(){
