@@ -19,7 +19,7 @@ var jumpButtonDown = false;
 var wallJumpRight = false;
 var wallJumpLeft = false;
 var inAir = false;
-var dash = 90;
+var dash = 0;
 var jumpTime = 0;
 var timeAfterJump = 0;
 var invincible = false;
@@ -63,7 +63,7 @@ Player.prototype.update = function() {
             wallJumpLeft = false;
             wallJumpRight = false;
             this.body.velocity.x = 0;
-            if (!game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+            if (!game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !game.input.keyboard.isDown(Phaser.Keyboard.D)){
             	this.frameName = 'idle';
             }
         }else{
@@ -86,7 +86,7 @@ Player.prototype.update = function() {
 
 
         //stops velocity and animation when releasing button  for the right
-        if (game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) || game.input.keyboard.justReleased(Phaser.Keyboard.LEFT)){
+        if ((game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) || game.input.keyboard.justReleased(Phaser.Keyboard.LEFT)) && !game.input.keyboard.isDown(Phaser.Keyboard.D)){
             if(inAir == false) {
                 this.animations.stop();
                 this.frameName = 'idle';
@@ -186,6 +186,8 @@ Player.prototype.update = function() {
             	this.animations.stop();
             	this.body.gravity.y = 0;
             	this.frameName = 'run2';
+            } else{
+            	this.animations.play('run');
             }
             invincible = true;
             dash -= 1;
@@ -197,6 +199,8 @@ Player.prototype.update = function() {
             	this.body.gravity.y = 0;
             	this.animations.stop();
             	this.frameName = 'run2';
+            }else{
+            	this.animations.play('run');
             }
             invincible = true;
             dash -= 1;
@@ -278,12 +282,12 @@ Player.prototype.update = function() {
         }
 
         if(dash <= 0) dash=0;
-        if(dash >=90) dash=90;
+        if(dash >=180) dash=180;
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.P)) dash += 2;
 
 }
 
-Player.prototype.getDash = function() {
-    return dash;
+Player.prototype.getDashScale = function() {
+    return dash/180;
 }
