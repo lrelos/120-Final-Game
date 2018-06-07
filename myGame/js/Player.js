@@ -9,7 +9,7 @@ var gameOptions = {
     playerGravity: 900, 
     playerSpeed: 250,
     playerJump: 400,
-    playerWallJump: 400,
+    playerWallJump: 450,
     playerForce: 225,
     playerDash: 400
 
@@ -124,9 +124,13 @@ Player.prototype.update = function() {
         	   this.animations.stop();
                 wallJumpLeft = true;
                 this.frameName = 'wallCling'
+            }else{
+            	wallJumpRight = wallJumpLeft = false;
+            	this.animations.stop();
+            	this.frameName = 'jump';	
             }
         }
-        if((wallJumpRight && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || wallJumpLeft && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+        if((wallJumpRight && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || wallJumpLeft && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ){
             this.frameName = 'jump';
             wallJumpRight = false;
             wallJumpLeft = false;
@@ -213,7 +217,7 @@ Player.prototype.update = function() {
             this.body.velocity.x = 0;
             this.frameName = 'dashUp';
             invincible = true;
-            dash -= 1;
+            dash -= 2;
         }
 
         if (inAir && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
@@ -253,7 +257,7 @@ Player.prototype.update = function() {
              this.body.velocity.x = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              this.body.velocity.y = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              invincible = true;
-             dash -=1;
+             dash -=2;
         }
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
@@ -263,7 +267,7 @@ Player.prototype.update = function() {
              this.body.velocity.x = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              this.body.velocity.y = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
              invincible = true;
-             dash -= 1;
+             dash -= 2;
         }
 
         // Stops the running animation after the dash button is released 
