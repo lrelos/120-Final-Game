@@ -13,9 +13,9 @@ var numofLevel = 2;
 
 //global vars for level select menu
 game.global = {
-	thumbRows : 5,
+	thumbRows : 3,
 	// number of thumbnail cololumns
-	thumbCols : 4,
+	thumbCols : 3,
 	// width of a thumbnail, in pixels
 	thumbWidth : 64,
 	// height of a thumbnail, in pixels
@@ -26,7 +26,7 @@ game.global = {
 	// 0 = playable yet unfinished level
 	// 1, 2, 3 = level finished with 1, 2, 3 stars
 	// 4 = locked
-	starsArray : [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+	starsArray : [0,4,4,4,4,4,4,4,4],
 	// level currently playing
 	level : 0
 }
