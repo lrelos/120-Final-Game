@@ -21,6 +21,7 @@ var wallJumpLeft = false;
 var inAir = false;
 var dash = 90;
 var jumpTime = 0;
+var timeAfterJump = 0;
 var invincible = false;
 
 function Player(game, x, y, frame) {
@@ -101,6 +102,7 @@ Player.prototype.update = function() {
             	this.frameName = 'jump';
                 this.body.velocity.y = -gameOptions.playerJump;
                 jumpButtonDown = true;
+                timeAfterJump = game.time.time + 250;
             }
 
             if(jumpButtonDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
@@ -114,11 +116,11 @@ Player.prototype.update = function() {
         // Checks if player is in Air, holding right against all to the right,
         // and if player is blocked wall
         if(inAir){
-            if (this.body.blocked.right || this.body.touching.right) {
+            if ((this.body.blocked.right || this.body.touching.right) && game.time.time > timeAfterJump) {
         	    this.animations.stop();
                 wallJumpRight = true;
                 this.frameName = 'wallCling'
-            } else if(this.body.blocked.left || this.body.touching.left) {
+            } else if((this.body.blocked.left || this.body.touching.left) && game.time.time > timeAfterJump) {
         	   this.animations.stop();
                 wallJumpLeft = true;
                 this.frameName = 'wallCling'

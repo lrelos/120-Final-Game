@@ -12,9 +12,44 @@
          "width":35,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Items",
+         "objects":[
+                {
+                 "gid":99,
+                 "height":46,
+                 "id":21,
+                 "name":"scroll",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":70,
+                 "x":1329,
+                 "y":1609.66666666667
+                }, 
+                {
+                 "gid":99,
+                 "height":46,
+                 "id":22,
+                 "name":"scroll",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":70,
+                 "x":558.333333333333,
+                 "y":833.666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":1,
+ "nextlayerid":6,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2018.05.24",
@@ -1188,6 +1223,19 @@
                      "y":0
                     }
                 }],
+         "tilewidth":70
+        }, 
+        {
+         "columns":1,
+         "firstgid":99,
+         "image":"..\/img\/scroll.png",
+         "imageheight":46,
+         "imagewidth":70,
+         "margin":0,
+         "name":"scrolls",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":46,
          "tilewidth":70
         }],
  "tilewidth":70,
