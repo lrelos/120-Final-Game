@@ -154,12 +154,11 @@ Player.prototype.update = function() {
             jumpTime = game.time.time + 500
         }
 
- // *********************
-        // This is the WIP dash code
+ 		// *********************
+        // Dash Code
         // *********************
 
-        // Checks to see if either the right arrow or left arrow have been pressed 
-        // so that the dash can done
+        // Dashes left or right depending on input or where the player is facing if there is no input.
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
             this.body.velocity.x = -gameOptions.playerDash;
@@ -210,6 +209,7 @@ Player.prototype.update = function() {
             dash -= 1;
         }
 
+        //Dashes up if up key is down
         if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.body.gravity.y = 0;
@@ -220,6 +220,7 @@ Player.prototype.update = function() {
             dash -= 2;
         }
 
+        //Dashes down in midair if down key is down
         if (inAir && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.body.gravity.y = 0;
@@ -229,7 +230,7 @@ Player.prototype.update = function() {
             invincible = true;
             dash -= 1;
         }
-        // this is the wip dash code for diagonal down to the right
+        // Dashes down and to the right if both down and right keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && inAir && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashDown';
@@ -240,6 +241,7 @@ Player.prototype.update = function() {
              dash -= 1;
         }
 
+        //Dashes down and to the left if both down and left keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && inAir && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashDown';
@@ -250,6 +252,7 @@ Player.prototype.update = function() {
              dash -=1;
         }
 
+        //Dashes up and to the right if both up and right keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashUp';
@@ -260,6 +263,7 @@ Player.prototype.update = function() {
              dash -=2;
         }
 
+        //Dashes up and to the left if both up and left keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
         	wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashUp';
@@ -270,7 +274,7 @@ Player.prototype.update = function() {
              dash -= 2;
         }
 
-        // Stops the running animation after the dash button is released 
+        // Stops the running animation after the dash button is released or dash resource runs out
         if(game.input.keyboard.justReleased(Phaser.Keyboard.D) || (game.input.keyboard.isDown(Phaser.Keyboard.D) && dash <= 0)){
         	invincible = false;
         	this.body.gravity.y = gameOptions.playerGravity;
@@ -285,13 +289,16 @@ Player.prototype.update = function() {
         	}
         }
 
+        //Binds dash between 0 and 180
         if(dash <= 0) dash=0;
         if(dash >=180) dash=180;
 
+        //Debug function to increase dash at will
         if(game.input.keyboard.isDown(Phaser.Keyboard.P)) dash += 2;
 
 }
 
+//Makes dash value visible by other files for purpose of dash bar in UI
 Player.prototype.getDashScale = function() {
     return dash/180;
 }
