@@ -13,9 +13,9 @@ var numofLevel = 2;
 
 //global vars for level select menu
 game.global = {
-	thumbRows : 3,
+	thumbRows : 5,
 	// number of thumbnail cololumns
-	thumbCols : 3,
+	thumbCols : 4,
 	// width of a thumbnail, in pixels
 	thumbWidth : 64,
 	// height of a thumbnail, in pixels
@@ -26,7 +26,7 @@ game.global = {
 	// 0 = playable yet unfinished level
 	// 1, 2, 3 = level finished with 1, 2, 3 stars
 	// 4 = locked
-	starsArray : [0,4,4,4,4,4,4,4,4],
+	starsArray : [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
 	// level currently playing
 	level : 0
 }
@@ -279,10 +279,10 @@ Inputs.play.prototype = {
 	},
 	render: function() {
 		// show timer01 debug text
-		var dash = this.player.getDashScale();
+		var dash = this.player.getDash();
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
 		game.debug.text('Stars :' + stars, 50, 50, "#000000", '72px');
-        this.dashBar.scale.x = dash;
+        this.dashBar.scale.x = dash*(1/90);
 	},
 	endGame: function(){
 		this.state.start('gameover', true, false);
@@ -325,7 +325,8 @@ Inputs.gameover.prototype = {
 game.state.add("Loading", loading);
 game.state.add("menu", Inputs.menu);
 game.state.add("LevelSelect", levelSelect);
-game.state.add("lvl1", Inputs.play);
+game.state.add("lvl0", Inputs.play);
 game.state.add("gameover", Inputs.gameover);
+game.state.add('lvl1', Level1);
 game.state.add("lvl2", Level2);
 game.state.start("Loading");
