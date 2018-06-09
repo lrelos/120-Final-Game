@@ -24,6 +24,7 @@ var jumpTime = 0;
 var timeAfterJump = 0;
 var invincible = false;
 
+
 function Player(game, x, y, frame) {
 	// call to Phaser.sprite // new sprite (game, x, y, key, frame)
 	Phaser.Sprite.call(this, game, x, y, 'ninja', 'wallCling');
@@ -31,6 +32,7 @@ function Player(game, x, y, frame) {
     this.scale.setTo(0.3);
 
     this.animations.add('run', Phaser.Animation.generateFrameNames('run', 1, 8), 10, true);
+
 
 	// add properties
     game.physics.arcade.enable(this);
@@ -142,7 +144,7 @@ Player.prototype.update = function() {
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x = -gameOptions.playerForce;
             wallJumpRight = false;
-            jumpTime = game.time.time + 500;
+            jumpTime = game.time.time + 425;
         }
 
         //Wall jump Left
@@ -151,7 +153,7 @@ Player.prototype.update = function() {
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x =  gameOptions.playerForce;
             wallJumpLeft = false;
-            jumpTime = game.time.time + 500
+            jumpTime = game.time.time + 425;
         }
 
  		// *********************
@@ -160,7 +162,7 @@ Player.prototype.update = function() {
 
         // Dashes left or right depending on input or where the player is facing if there is no input.
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
             this.body.velocity.x = -gameOptions.playerDash;
             this.body.velocity.y = 0;
             if(inAir){
@@ -171,7 +173,7 @@ Player.prototype.update = function() {
             invincible = true;
             dash -= 1;
         } else if (game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.body.velocity.y = 0;
             this.body.velocity.x = gameOptions.playerDash;
             if(inAir){
@@ -182,7 +184,7 @@ Player.prototype.update = function() {
             invincible = true;
             dash -= 1;
         }else if(game.input.keyboard.isDown(Phaser.Keyboard.D) && this.scale.x < 0 && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
             this.body.velocity.x = -gameOptions.playerDash;
             this.body.velocity.y = 0;
             if(inAir){
@@ -195,7 +197,7 @@ Player.prototype.update = function() {
             invincible = true;
             dash -= 1;
         } else if (game.input.keyboard.isDown(Phaser.Keyboard.D) && this.scale.x > 0 && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.body.velocity.y = 0;
             this.body.velocity.x = gameOptions.playerDash;
             if(inAir){
@@ -211,7 +213,7 @@ Player.prototype.update = function() {
 
         //Dashes up if up key is down
         if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.body.gravity.y = 0;
             this.body.velocity.y = -gameOptions.playerDash; 
             this.body.velocity.x = 0;
@@ -222,7 +224,7 @@ Player.prototype.update = function() {
 
         //Dashes down in midair if down key is down
         if (inAir && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.D) && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.body.gravity.y = 0;
             this.body.velocity.y = gameOptions.playerDash;
             this.body.velocity.x = 0; 
@@ -232,7 +234,7 @@ Player.prototype.update = function() {
         }
         // Dashes down and to the right if both down and right keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && inAir && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashDown';
         	this.body.gravity.y = 0;
              this.body.velocity.x = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
@@ -243,7 +245,7 @@ Player.prototype.update = function() {
 
         //Dashes down and to the left if both down and left keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && inAir && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashDown';
         	this.body.gravity.y = 0;
              this.body.velocity.x = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
@@ -254,7 +256,7 @@ Player.prototype.update = function() {
 
         //Dashes up and to the right if both up and right keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashUp';
         	this.body.gravity.y = 0;
              this.body.velocity.x = Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);
@@ -265,7 +267,7 @@ Player.prototype.update = function() {
 
         //Dashes up and to the left if both up and left keys are down
         if(game.input.keyboard.isDown(Phaser.Keyboard.D) && game.input.keyboard.isDown(Phaser.Keyboard.UP) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && dash >0){
-        	wallJumpRight = wallJumpLeft = false;
+            wallJumpRight = wallJumpLeft = false;
         	this.frameName = 'dashUp';
         	this.body.gravity.y = 0;
              this.body.velocity.x = -Math.sqrt(Math.pow(gameOptions.playerDash, 2)/2);

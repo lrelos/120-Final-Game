@@ -10,6 +10,7 @@ var silverTime = 60;
 var goldTime = 35;
 var stars = 0;
 var numofLevel = 2;
+var dashSound;
 
 //global vars for level select menu
 game.global = {
@@ -72,9 +73,11 @@ Inputs.play.prototype = {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
         //	Plays Background music
-        this.music = this.add.audio('bgMusic');
+        this.music = this.add.audio('bgMusic1');
         this.music.play();
         this.music.loop;
+
+        dashSound = game.add.audio('dashSnd');
 
         this.total = 0;
         timer = this.time.create(false);

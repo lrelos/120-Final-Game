@@ -12,7 +12,7 @@ Level2 = {
 		this.stars = 0;
 
 		// Plays Background Music
-        this.music = this.add.audio('bgMusic');
+        this.music = this.add.audio('bgMusic1');
         this.music.play();
         this.music.loop;
 
@@ -65,6 +65,16 @@ Level2 = {
 		game.physics.arcade.collide(this.player, lvl2Layer);
 		// adds overlap for player and scroll
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
+
+		if (this.player.body.y > (game.world.height + this.player.body.height/2)) {
+			this.player.kill();
+
+			// creates new player if player dies or falls of world
+			this.player = new Player(game, 100, 1000); 
+        	game.add.existing(this.player);
+        	//Phaser.Camera.FOLLOW_PLATFORMER = 1;
+        	game.camera.follow(this.player);
+ 		}
 
 		function collectScroll(player, scroll) {
 			scroll.kill(); // kills scroll

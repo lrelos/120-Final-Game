@@ -17,11 +17,19 @@
 		game.load.atlas('Mnt', 'tempMnt.png', 'tempMnt.json');
 	    game.load.atlas('ninja', 'ninja.png', 'ninja.json');
 		game.load.atlas('ground', 'ground.png', 'ground.json');
-		game.load.audio('bgMusic', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
-
+		
 		game.load.image('sandTiles', '../level2/sheet.png');
 		game.load.image('lvl2Background', '../level2/DesertBackground.png');
 		game.load.tilemap('Level2', '../level2/Level2.json', null, Phaser.Tilemap.TILED_JSON);
+
+		game.load.audio('bgMusic1', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
+		game.load.audio('bgMusic2', ['../audio/Ninja_Background_2.mp3'], ['../audio.Ninja_Background_2.ogg']);
+		game.load.audio('bgMusic3', ['../audio/Ninja_Background_3.mp3'], ['../audio.Ninja_Background_3.ogg']);
+		game.load.audio('bgMusic4', ['../audio/Ninja_Background_4.mp3'], ['../audio.Ninja_Background_4.ogg']);
+		game.load.audio('dashSnd', ['../audio/Dash.mp3'], ['../audio.Dash.ogg']);
+
+
+
 	},
   	create: function(){
   		// going to level select state
