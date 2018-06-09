@@ -17,11 +17,21 @@
 		game.load.atlas('Mnt', 'tempMnt.png', 'tempMnt.json');
 	    game.load.atlas('ninja', 'ninja.png', 'ninja.json');
 		game.load.atlas('ground', 'ground.png', 'ground.json');
-		
+
+
+		// load level 2 assets
 		game.load.image('sandTiles', '../level2/sheet.png');
 		game.load.image('lvl2Background', '../level2/DesertBackground.png');
 		game.load.tilemap('Level2', '../level2/Level2.json', null, Phaser.Tilemap.TILED_JSON);
 
+		// load level 3 assets
+		game.load.image('iceTiles', '../level3/sheet.png');
+		game.load.image('lvl3Background', '../level3/TundraBackground.png');
+		game.load.image('rideblocks', '../level3/metalMid.png');
+		game.load.tilemap('Level3', '../level3/Level3.json', null, Phaser.Tilemap.TILED_JSON);
+
+
+		// load all audio
 		game.load.audio('bgMusic1', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
 		game.load.audio('bgMusic2', ['../audio/Ninja_Background_2.mp3'], ['../audio.Ninja_Background_2.ogg']);
 		game.load.audio('bgMusic3', ['../audio/Ninja_Background_3.mp3'], ['../audio.Ninja_Background_3.ogg']);
