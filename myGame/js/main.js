@@ -11,6 +11,8 @@ var goldTime = 35;
 var stars = 0;
 var numofLevel = 2;
 var dashSound;
+var frictionDragX = 2500;
+var frictionDragY = 750;
 
 //global vars for level select menu
 game.global = {
@@ -308,7 +310,8 @@ Inputs.gameover.prototype = {
 game.state.add("Loading", loading);
 game.state.add("titleScreen", titleScreen);
 game.state.add("LevelSelect", levelSelect);
-game.state.add("lvl1", Inputs.play);
+game.state.add("lvl3", Inputs.play);
 game.state.add("gameover", Inputs.gameover);
 game.state.add("lvl2", Level2);
+game.state.add("lvl1", Level3);
 game.state.start("Loading");
