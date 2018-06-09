@@ -128,6 +128,9 @@ Player.prototype.update = function() {
             	this.frameName = 'jump';	
             }
         }
+        
+        // cancels out wall jump and cling animation if button is released or other direction is pressed
+        // resets the friction as well
         if((wallJumpRight && (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) ) || wallJumpLeft && (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) || game.input.keyboard.justReleased(Phaser.Keyboard.LEFT)){
             this.frameName = 'jump';
             wallJumpRight = false;

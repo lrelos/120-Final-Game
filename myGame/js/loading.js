@@ -12,6 +12,8 @@
         game.load.spritesheet("levels", "levelSelect.png", game.global.thumbWidth, game.global.thumbHeight);
         game.load.image('dashBar', 'dashBar.png');
         game.load.image('scrolls', 'scroll.png');
+        game.load.image('menuBackground', 'MenuBackground.png')
+        game.load.image('titleScreen', 'titleScreen.png');
 		game.load.spritesheet("level_arrows", "level_arrows.png", 48, 48);
 		game.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
 		game.load.atlas('Mnt', 'tempMnt.png', 'tempMnt.json');
@@ -43,6 +45,6 @@
 	},
   	create: function(){
   		// going to level select state
-		game.state.start('menu');
+		game.state.start('titleScreen');
 	}
 }   
