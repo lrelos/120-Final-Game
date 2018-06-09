@@ -32,26 +32,6 @@ game.global = {
 	level : 0
 }
 
-Inputs.menu = function() {};
-Inputs.menu.prototype = {
-	preload: function(){
-	    // load some stuff
-
-	},
-	create: function(){
-		// do some stuff
-		this.add.text(225, 240, 'Press Spacebar to begin');
-		this.add.text(250, 280, 'Collect the Diamond');
-		this.stage.backgroundColor = '#facade';
-	},
-	update: function(){
-		// go on to next state
-        if(this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-			this.state.start('LevelSelect', true, false);
-		}
-	}
-}
-
 Inputs.play = function(game){
 	this.dashBar = null;
 	this.cursors = null;
@@ -326,7 +306,7 @@ Inputs.gameover.prototype = {
 
 
 game.state.add("Loading", loading);
-game.state.add("menu", Inputs.menu);
+game.state.add("titleScreen", titleScreen);
 game.state.add("LevelSelect", levelSelect);
 game.state.add("lvl1", Inputs.play);
 game.state.add("gameover", Inputs.gameover);

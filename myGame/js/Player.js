@@ -3,7 +3,7 @@ var gameOptions = {
     playerGravity: 925, 
     playerSpeed: 200,
     playerJump: 400,
-    playerWallJump: 475,
+    playerWallJump: 400,
     playerForce: 250,
 
     playerGravity: 900, 
@@ -20,6 +20,7 @@ var wallJumpRight = false;
 var wallJumpLeft = false;
 var inAir = false;
 var dash = 0;
+var defaultDash = 0;
 var jumpTime = 0;
 var timeAfterJump = 0;
 var invincible = false;
@@ -28,7 +29,7 @@ var invincible = false;
 function Player(game, x, y, frame) {
 	// call to Phaser.sprite // new sprite (game, x, y, key, frame)
 	Phaser.Sprite.call(this, game, x, y, 'ninja', 'wallCling');
-	this.anchor.setTo(0.5, 0.5);
+	this.anchor.setTo(0.5, 0);
     this.scale.setTo(0.3);
 
     this.animations.add('run', Phaser.Animation.generateFrameNames('run', 1, 8), 10, true);
@@ -303,4 +304,8 @@ Player.prototype.update = function() {
 //Makes dash value visible by other files for purpose of dash bar in UI
 Player.prototype.getDashScale = function() {
     return dash/180;
+}
+
+Player.prototype.reset = function(){
+    dash = defaultDash;
 }
