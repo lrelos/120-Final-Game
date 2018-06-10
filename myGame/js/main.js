@@ -315,6 +315,7 @@ game.state.add("gameover", Inputs.gameover);
 game.state.add("lvl2", Level2);
 game.state.add("lvl3", Level3);
 game.state.add("lvl4", Level4);
+game.state.add("lvl5", Level5);
 game.state.add("lvl6", Level6);
 game.state.add("lvl7", Level7);
 game.state.start("Loading");
