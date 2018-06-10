@@ -126,6 +126,7 @@ Player.prototype.update = function() {
             	wallJumpRight = wallJumpLeft = false;
             	this.animations.stop();
             	this.frameName = 'jump';	
+                this.body.drag.y = 0;
             }
         }
         

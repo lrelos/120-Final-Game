@@ -92,6 +92,8 @@ Level7 = {
 
 
 		function collectScroll(player, scroll) {
+			this.scrollSound = this.add.audio('pickUpScroll');
+        	this.scrollSound.play();
 			scroll.kill(); // kills scroll
 			dash += 60; // adds to the dash meter
 		}
