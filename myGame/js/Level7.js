@@ -66,7 +66,7 @@ Level7 = {
 
 		// adds collision for player and tiled map
 		game.physics.arcade.collide(this.player, lvl1Layer1);
-		game.physics.arcade.collide(this.player, lvl1Layer5, killPlayer, null, this);
+		game.physics.arcade.collide(this.player, lvl1Layer5, destroyPlayer2, null, this);
 		// adds overlap for player and scroll
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
 		game.physics.arcade.overlap(this.player, this.flags, reachFlag, null, this);
@@ -82,9 +82,11 @@ Level7 = {
         	game.camera.follow(this.player);
         }
 
-		function killPlayer(player){
-			this.player.body.x = 300;
-			this.player.body.y = 2525;
+		function destroyPlayer2(player){
+			if (!invincible){
+				this.player.body.x = 2223;
+				this.player.body.y = 335;
+			}
 		}
 
 
