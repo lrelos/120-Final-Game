@@ -96,6 +96,9 @@ Level2 = {
 
  		// function when player collects scroll
 		function collectScroll(player, scroll) {
+			// Plays scroll sound effect
+        	this.scrollSound = this.add.audio('pickUpScroll');
+        	this.scrollSound.play();			
 			scroll.kill(); // kills scroll
 			dash += 60; // adds to the dash meter
 		}

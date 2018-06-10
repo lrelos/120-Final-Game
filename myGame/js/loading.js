@@ -40,7 +40,7 @@
 
 		// load level 6 assts
 		game.load.image('metalTiles', '../level6/sheet.png');
-		//game.load.image('lvl2Background', '../level2/DesertBackground.png');
+		game.load.image('lvl6Background', '../level6/ElectricBackground.png');
 		game.load.spritesheet('hazards', '../level6/electric_hazard.png', 144, 22);
 		game.load.spritesheet('hazards2', '../level6/electric_hazard_2.png', 35, 232);
 		game.load.tilemap('Level6', '../level6/Level6.json', null, Phaser.Tilemap.TILED_JSON);

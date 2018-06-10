@@ -6,9 +6,9 @@ Level6 = {
 		this.total = 0;
 		this.timer;
    		this.timeText;
-		this.bronzeTime = 200;
-		this.silverTime = 150;
-		this.goldTime = 110;
+		this.bronzeTime = 180;
+		this.silverTime = 120;
+		this.goldTime = 90;
 		this.stars = 0;
 
 		// Plays Background Music
@@ -25,7 +25,7 @@ Level6 = {
 		game.physics.arcade.TILE_BIAS = 32;
 
 		// adds the background image. Separate from tile
-	 //   this.background = game.add.tileSprite(0, 0, 2450, 1750, 'lvl2Background');
+	    this.background = game.add.tileSprite(0, 0, 4200, 2800, 'lvl6Background');
 
 	    // creates the tile map
 		lvl6Map = game.add.tilemap('Level6');
@@ -205,6 +205,9 @@ Level6 = {
 
  		// function when player collects scroll
 		function collectScroll(player, scroll) {
+			// Plays scroll sound effect
+        	this.scrollSound = this.add.audio('pickUpScroll');
+        	this.scrollSound.play();
 			scroll.kill(); // kills scroll
 			dash += 60; // adds to the dash meter
 		}
