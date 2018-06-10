@@ -50,6 +50,11 @@
 		game.load.spritesheet('hazards2', '../level6/electric_hazard_2.png', 35, 232);
 		game.load.tilemap('Level6', '../level6/Level6.json', null, Phaser.Tilemap.TILED_JSON);
 
+		//load level 7 assets
+		game.load.image('rockTiles', '../level7/rockTileset.png');
+		game.load.image('spikes', '../level7/SpikesAnim.png');
+		game.load.tilemap('level7', '../level7/rockyRoad.json', null, Phaser.Tilemap.TILED_JSON);
+
 
 		// load all audio
 		game.load.audio('bgMusic1', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
