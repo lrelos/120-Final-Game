@@ -10,12 +10,15 @@ var silverTime = 60;
 var goldTime = 35;
 var stars = 0;
 var numofLevel = 2;
+var dashSound;
+var frictionDragX = 2500;
+var frictionDragY = 750;
 
 //global vars for level select menu
 game.global = {
-	thumbRows : 5,
+	thumbRows : 3,
 	// number of thumbnail cololumns
-	thumbCols : 4,
+	thumbCols : 3,
 	// width of a thumbnail, in pixels
 	thumbWidth : 64,
 	// height of a thumbnail, in pixels
@@ -26,29 +29,9 @@ game.global = {
 	// 0 = playable yet unfinished level
 	// 1, 2, 3 = level finished with 1, 2, 3 stars
 	// 4 = locked
-	starsArray : [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+	starsArray : [0,4,4,4,4,4,4,4,4],
 	// level currently playing
 	level : 0
-}
-
-Inputs.menu = function() {};
-Inputs.menu.prototype = {
-	preload: function(){
-	    // load some stuff
-
-	},
-	create: function(){
-		// do some stuff
-		this.add.text(225, 240, 'Press Spacebar to begin');
-		this.add.text(250, 280, 'Collect the Diamond');
-		this.stage.backgroundColor = '#facade';
-	},
-	update: function(){
-		// go on to next state
-        if(this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-			this.state.start('LevelSelect', true, false);
-		}
-	}
 }
 
 Inputs.play = function(game){
@@ -72,9 +55,11 @@ Inputs.play.prototype = {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
         //	Plays Background music
-        this.music = this.add.audio('bgMusic');
+        this.music = this.add.audio('bgMusic1');
         this.music.play();
         this.music.loop;
+
+        dashSound = game.add.audio('dashSnd');
 
         this.total = 0;
         timer = this.time.create(false);
@@ -82,7 +67,7 @@ Inputs.play.prototype = {
         timer.start();
 
         //	Sprites
-        this.bg = this.add.sprite(0, 0, 'Mnt', 'mountain');
+        this.bg = this.add.sprite(0, 0, 'Mnt');
         //this.bg = this.add.sprite(0, 250, 'atlas', 'clouds');
 
         //creates a player using the Player prefab
@@ -279,10 +264,10 @@ Inputs.play.prototype = {
 	},
 	render: function() {
 		// show timer01 debug text
-		var dash = this.player.getDash();
+		var dash = this.player.getDashScale();
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
 		game.debug.text('Stars :' + stars, 50, 50, "#000000", '72px');
-        this.dashBar.scale.x = dash*(1/90);
+        this.dashBar.scale.x = dash;
 	},
 	endGame: function(){
 		this.state.start('gameover', true, false);
@@ -330,4 +315,3 @@ game.state.add("gameover", Inputs.gameover);
 game.state.add("lvl2", Level2);
 game.state.add("lvl3", Level3);
 game.state.start("Loading");
-
