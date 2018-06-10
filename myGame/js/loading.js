@@ -37,6 +37,11 @@
 		game.load.image('lvl3Background', '../level3/TundraBackground.png');
 		game.load.image('rideblocks', '../level3/metalMid.png');
 		game.load.tilemap('Level3', '../level3/Level3.json', null, Phaser.Tilemap.TILED_JSON);
+		
+		// load level 4 assets
+		game.load.image('metalTiles', '../level4/sheet.png');
+		game.load.image('lvl4Background', '../level4/bulkhead-wallsx3.png');
+		game.load.tilemap('Level4', '../level4/Level4.json', null, Phaser.Tilemap.TILED_JSON);
 
 		// load level 6 assts
 		game.load.image('metalTiles', '../level6/sheet.png');
