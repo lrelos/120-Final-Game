@@ -6,9 +6,9 @@ Level3 = {
 		this.total = 0;
 		this.timer;
    		this.timeText;
-		this.bronzeTime = 120;
-		this.silverTime = 90;
-		this.goldTime = 60;
+		this.bronzeTime = 150;
+		this.silverTime = 100;
+		this.goldTime = 70;
 		this.stars = 0;
 
 		// Plays Background Music
@@ -46,13 +46,27 @@ Level3 = {
 		// parameters(Object layer name, named of objects tile reference or gid #, image key name, frame #, exists, autocall, named of group to add objects to)
 		lvl3Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
 
+
+
+		// Creates rideable blocks for this levels
 		this.rideBlocks = game.add.group();
 		this.rideBlocks.enableBody = true;
 		lvl3Map.createFromObjects('Items', 'rideBlock', 'rideblocks', 0, true, false, this.rideBlocks);
-
+		// sets attributes for  rideable blocks
 		this.rideBlocks.forEach(function(rideBlock){
         rideBlock.body.immovable = true;
         rideBlock.body.velocity.y = -100;
+    	});
+
+    	// Creates flags to reach for win condition
+		this.flags = game.add.group();
+		this.flags.enableBody = true;
+		lvl3Map.createFromObjects('Items', 'flag', 'flags', 2, true, false, this.flags);
+		// sets attributes for  flags
+		this.flags.forEach(function(flag){
+        flag.body.immovable = true;
+        flag.animations.add('flagWave', [0, 1], 2, true);
+		flag.animations.play('flagWave');
     	});
 
 
@@ -79,6 +93,8 @@ Level3 = {
 		game.physics.arcade.collide(this.player, this.rideBlocks);
 		// adds overlap for player and scroll
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
+		// adds overlap for player and flag
+		game.physics.arcade.overlap(this.player, this.flags, reachFlag, null, this);
 
 
 		// kills and resets player if they fall off the world
@@ -99,8 +115,28 @@ Level3 = {
 			dash += 60; // adds to the dash meter
 		}
 
+		// function for when player reaches flag
+		function reachFlag(player, flag) {
+			//stops the timer
+			timer.stop();
+	
+			this.music.stop();
+			frictionDragX = 2500;
+				
+			// did we improved our stars in current level?
+			if(game.global.starsArray[game.global.level-1] < this.stars){
+				game.global.starsArray[game.global.level-1] = this.stars;
+			}
+			// if we completed a level and next level is locked - and exists - then unlock it
+			if( this.stars > 0 && game.global.starsArray[game.global.level]==4 && game.global.level<game.global.starsArray.length){
+				game.global.starsArray[game.global.level] = 0;
+			}
+			game.state.start('LevelSelect');
+		}
+
 
 		// changes friction when riding on a non-icy platform
+		// *****Used for this level only******
 		if (this.player.body.touching.down) {
 			frictionDragX = 2500;
 		}

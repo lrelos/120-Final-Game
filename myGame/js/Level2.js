@@ -6,9 +6,9 @@ Level2 = {
 		this.total = 0;
 		this.timer;
    		this.timeText;
-		this.bronzeTime = 120;
-		this.silverTime = 90;
-		this.goldTime = 60;
+		this.bronzeTime = 90;
+		this.silverTime = 60;
+		this.goldTime = 30;
 		this.stars = 0;
 
 		// Plays Background Music
@@ -46,6 +46,17 @@ Level2 = {
 		// parameters(Object layer name, named of objects tile reference or gid #, image key name, frame #, exists, autocall, named of group to add objects to)
 		lvl2Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
 
+		// Creates flags to reach for win condition
+		this.flags = game.add.group();
+		this.flags.enableBody = true;
+		lvl2Map.createFromObjects('Items', 'flag', 'flags', 2, true, false, this.flags);
+		// sets attributes for  flags
+		this.flags.forEach(function(flag){
+        flag.body.immovable = true;
+        flag.animations.add('flagWave', [0, 1], 2, true);
+		flag.animations.play('flagWave');
+    	});
+
 
 		// creates new player for this level
 		this.player = new Player(game, 100, 1000); 
@@ -58,6 +69,9 @@ Level2 = {
 		this.dashBar.scale.y = 0.5;
 		this.dashBar.fixedToCamera = true;
 
+		//changes friction for ice level for slippery terrain
+		frictionDragX = 2500;
+
 	},
 
 	update: function() {
@@ -66,6 +80,8 @@ Level2 = {
 		game.physics.arcade.collide(this.player, lvl2Layer);
 		// adds overlap for player and scroll
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
+		// adds overlap for player and flag
+		game.physics.arcade.overlap(this.player, this.flags, reachFlag, null, this);
 
 		if (this.player.body.y > (game.world.height + this.player.body.height/2)) {
 			this.player.kill();
@@ -77,10 +93,31 @@ Level2 = {
         	game.camera.follow(this.player);
  		}
 
+ 		// function when player collects scroll
 		function collectScroll(player, scroll) {
 			scroll.kill(); // kills scroll
 			dash += 60; // adds to the dash meter
 		}
+
+		// function for when player reaches flag
+		function reachFlag(player, flag) {
+			//stops the timer
+			timer.stop();
+	
+			this.music.stop();
+			frictionDragX = 2500;
+				
+			// did we improved our stars in current level?
+			if(game.global.starsArray[game.global.level-1] < this.stars){
+				game.global.starsArray[game.global.level-1] = this.stars;
+			}
+			// if we completed a level and next level is locked - and exists - then unlock it
+			if( this.stars > 0 && game.global.starsArray[game.global.level]==4 && game.global.level<game.global.starsArray.length){
+				game.global.starsArray[game.global.level] = 0;
+			}
+			game.state.start('LevelSelect');
+		}
+
 
 		// amount of stars we recieve
 		if(this.total < this.goldTime) {
