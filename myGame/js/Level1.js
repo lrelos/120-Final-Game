@@ -24,7 +24,7 @@ Level1 = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// adds the background image. Separate from tile
-	    //this.background = game.add.sprite(0, 0, 384, 216, 'lvl1Background');
+	    this.background = game.add.tileSprite(0, 0, 5500, 3093, 'lvl1Background');
 
 	    // creates the tile map
 		lvl1Map = game.add.tilemap('Level1');
@@ -47,7 +47,7 @@ Level1 = {
 
 
 		// creates new player for this level
-		this.player = new Player(game, 100, 100); 
+		this.player = new Player(game, 150, 2425); //(game, x, y )
         game.add.existing(this.player);
         //Phaser.Camera.FOLLOW_PLATFORMER = 1;
         game.camera.follow(this.player);
