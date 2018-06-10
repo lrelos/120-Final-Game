@@ -1,4 +1,5 @@
-  loading = {
+
+ loading = {
 	init: function(){
 		// going fullscreen
 		//game.scale.pageAlignHorizontally = true;
@@ -12,15 +13,19 @@
         game.load.spritesheet("levels", "levelSelect.png", game.global.thumbWidth, game.global.thumbHeight);
         game.load.image('dashBar', 'dashBar.png');
         game.load.image('scrolls', 'scroll.png');
+        game.load.spritesheet('flags', 'flag.png', 70, 70);
         game.load.image('menuBackground', 'MenuBackground.png')
         game.load.image('titleScreen', 'titleScreen.png');
 		game.load.spritesheet("level_arrows", "level_arrows.png", 48, 48);
-		game.load.spritesheet('flags', 'flag.png', 70, 70);
 		game.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
 		game.load.image('Mnt', 'Mnt.png');
 	    game.load.atlas('ninja', 'ninja.png', 'ninja.json');
 		game.load.atlas('ground', 'ground.png', 'ground.json');
 
+    // load level 1 assets
+		game.load.image('tutorial', '../level1/NatureSheet.png');
+		game.load.image('lvl1Background', '../level1/Flat Nature Art.png');
+		game.load.tilemap('Level1', '../level1/Level1.json', null, Phaser.Tilemap.TILED_JSON);
 
 		// load level 2 assets
 		game.load.image('sandTiles', '../level2/sheet.png');
@@ -49,3 +54,4 @@
 		game.state.start('titleScreen');
 	}
 }   
+
