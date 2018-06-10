@@ -17,7 +17,7 @@
 		game.load.spritesheet("level_arrows", "level_arrows.png", 48, 48);
 		game.load.spritesheet('flags', 'flag.png', 70, 70);
 		game.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
-		game.load.atlas('Mnt', 'tempMnt.png', 'tempMnt.json');
+		game.load.image('Mnt', 'Mnt.png');
 	    game.load.atlas('ninja', 'ninja.png', 'ninja.json');
 		game.load.atlas('ground', 'ground.png', 'ground.json');
 

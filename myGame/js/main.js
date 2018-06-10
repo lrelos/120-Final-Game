@@ -67,7 +67,7 @@ Inputs.play.prototype = {
         timer.start();
 
         //	Sprites
-        this.bg = this.add.sprite(0, 0, 'Mnt', 'mountain');
+        this.bg = this.add.sprite(0, 0, 'Mnt');
         //this.bg = this.add.sprite(0, 250, 'atlas', 'clouds');
 
         //creates a player using the Player prefab
