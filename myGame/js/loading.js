@@ -12,6 +12,7 @@
         game.load.spritesheet("levels", "levelSelect.png", game.global.thumbWidth, game.global.thumbHeight);
         game.load.image('dashBar', 'dashBar.png');
         game.load.image('scrolls', 'scroll.png');
+        game.load.spritesheet('flags', 'flag.png', 70, 70);
         game.load.image('menuBackground', 'MenuBackground.png')
         game.load.image('titleScreen', 'titleScreen.png');
 		game.load.spritesheet("level_arrows", "level_arrows.png", 48, 48);
