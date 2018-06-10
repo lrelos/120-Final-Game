@@ -66,12 +66,13 @@ Level7 = {
 
 		// adds collision for player and tiled map
 		game.physics.arcade.collide(this.player, lvl1Layer1);
-		game.physics.arcade.collide(this.player, lvl1Layer5);
+		game.physics.arcade.collide(this.player, lvl1Layer5, killPlayer, null, this);
 		// adds overlap for player and scroll
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
 		game.physics.arcade.overlap(this.player, this.flags, reachFlag, null, this);
 
 		if (this.player.body.y > (game.world.height + this.player.body.height/2)) {
+			console.log('Death');
 			this.player.kill();
 
 			// creates new player if player dies or falls of world
@@ -80,6 +81,11 @@ Level7 = {
         	//Phaser.Camera.FOLLOW_PLATFORMER = 1;
         	game.camera.follow(this.player);
         }
+
+		function killPlayer(player){
+			this.player.body.x = 300;
+			this.player.body.y = 2525;
+		}
 
 
 		function collectScroll(player, scroll) {
