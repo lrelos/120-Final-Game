@@ -80,6 +80,7 @@ Level7 = {
         	game.add.existing(this.player);
         	//Phaser.Camera.FOLLOW_PLATFORMER = 1;
         	game.camera.follow(this.player);
+        	lvl1Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
         }
 
 		function destroyPlayer2(player){
