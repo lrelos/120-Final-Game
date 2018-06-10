@@ -42,6 +42,11 @@
 		game.load.image('metalTiles', '../level4/sheet.png');
 		game.load.image('lvl4Background', '../level4/bulkhead-wallsx3.png');
 		game.load.tilemap('Level4', '../level4/Level4.json', null, Phaser.Tilemap.TILED_JSON);
+		
+		// load level 5 assets
+		game.load.image('purpleTiles', '../level5/sheet.png');
+		game.load.image('lvl5Background', '../level5/Flat Night 2 BG.png');
+		game.load.tilemap('Level5', '../level5/Level5.json', null, Phaser.Tilemap.TILED_JSON);
 
 		// load level 6 assts
 		game.load.image('metalTiles2', '../level6/sheet.png');

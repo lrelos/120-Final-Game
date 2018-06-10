@@ -1,0 +1,13 @@
+{ "columns":7,
+ "image":"sheet.png",
+ "imageheight":490,
+ "imagewidth":490,
+ "margin":0,
+ "name":"sheet",
+ "spacing":0,
+ "tilecount":49,
+ "tileheight":70,
+ "tilewidth":70,
+ "type":"tileset",
+ "version":1.2
+}
