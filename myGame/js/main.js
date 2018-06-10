@@ -9,7 +9,7 @@ var bronzeTime = 90;
 var silverTime = 60;
 var goldTime = 35;
 var stars = 0;
-var numofLevel = 2;
+var numOfLevels = 2;
 var dashSound;
 var frictionDragX = 2500;
 var frictionDragY = 750;

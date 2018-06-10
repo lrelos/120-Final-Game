@@ -1,17 +1,11 @@
 
 var gameOptions = {
-    playerGravity: 925, 
-    playerSpeed: 200,
-    playerJump: 400,
-    playerWallJump: 475,
-    playerForce: 250,
-
     playerGravity: 900, 
     playerSpeed: 250,
     playerJump: 400,
     playerWallJump: 450,
-    playerForce: 225,
-    playerDash: 400
+    playerForce: 250,
+    playerDash: 500
 
 }
 
@@ -62,12 +56,14 @@ Player.prototype.update = function() {
             inAir = false;
             wallJumpLeft = false;
             wallJumpRight = false;
-            this.body.velocity.x = 0;
+            this.body.drag.x = frictionDragX;
+            this.body.drag.y = 0;
             if (!game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !game.input.keyboard.isDown(Phaser.Keyboard.D)){
             	this.frameName = 'idle';
             }
         }else{
             inAir = true;
+            this.body.drag.x = 0;
         }
 
         //running animsation for left and right movement
@@ -90,7 +86,7 @@ Player.prototype.update = function() {
             if(inAir == false) {
                 this.animations.stop();
                 this.frameName = 'idle';
-                this.body.velocity.x = 0;
+                //this.body.velocity.x = 0;
             } // stops it for the left
         }
 
@@ -118,10 +114,12 @@ Player.prototype.update = function() {
         if(inAir){
             if ((this.body.blocked.right || this.body.touching.right) && game.time.time > timeAfterJump) {
         	    this.animations.stop();
+                this.body.drag.y = frictionDragY;
                 wallJumpRight = true;
                 this.frameName = 'wallCling'
             } else if((this.body.blocked.left || this.body.touching.left) && game.time.time > timeAfterJump) {
         	   this.animations.stop();
+               this.body.drag.y = frictionDragY;
                 wallJumpLeft = true;
                 this.frameName = 'wallCling'
             }else{
@@ -130,14 +128,20 @@ Player.prototype.update = function() {
             	this.frameName = 'jump';	
             }
         }
-        if((wallJumpRight && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || wallJumpLeft && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ){
+        
+        // cancels out wall jump and cling animation if button is released or other direction is pressed
+        // resets the friction as well
+        if((wallJumpRight && (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) || game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) ) || wallJumpLeft && (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) || game.input.keyboard.justReleased(Phaser.Keyboard.LEFT)){
             this.frameName = 'jump';
             wallJumpRight = false;
             wallJumpLeft = false;
+            this.body.drag.y = 0;
+            this.body.drag.x = 0;
         }
 
         //Wall jump Right
         if (wallJumpRight && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            this.body.drag.y = 0;
             this.frameName = 'jump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x = -gameOptions.playerForce;
@@ -147,6 +151,7 @@ Player.prototype.update = function() {
 
         //Wall jump Left
          if (wallJumpLeft && game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR) && game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            this.body.drag.y = 0;
             this.frameName = 'jump';
             this.body.velocity.y = -gameOptions.playerWallJump;
             this.body.velocity.x =  gameOptions.playerForce;
@@ -294,7 +299,7 @@ Player.prototype.update = function() {
         if(dash >=180) dash=180;
 
         //Debug function to increase dash at will
-        if(game.input.keyboard.isDown(Phaser.Keyboard.P)) dash += 2;
+        if(game.input.keyboard.isDown(Phaser.Keyboard.P)) dash += 20;
 
 }
 
