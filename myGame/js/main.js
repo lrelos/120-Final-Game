@@ -29,7 +29,7 @@ game.global = {
 	// 0 = playable yet unfinished level
 	// 1, 2, 3 = level finished with 1, 2, 3 stars
 	// 4 = locked
-	starsArray : [0,4,4,4,4,4,4,4,4],
+	starsArray : [0,0,0,0,0,0,0,0,0],
 	// level currently playing
 	level : 0
 }
@@ -310,11 +310,12 @@ Inputs.gameover.prototype = {
 game.state.add("Loading", loading);
 game.state.add("titleScreen", titleScreen);
 game.state.add("LevelSelect", levelSelect);
-game.state.add("lvl6", Level1);	//"lvl1", Inputs.play
+game.state.add("lvl1", Level1);	//"lvl1", Inputs.play
 game.state.add("gameover", Inputs.gameover);
 game.state.add("lvl2", Level2);
 game.state.add("lvl3", Level3);
 game.state.add("lvl4", Level4);
 game.state.add("lvl5", Level5);
-game.state.add("lvl1", Level6);
+game.state.add("lvl6", Level6);
+game.state.add("lvl7", Level7);
 game.state.start("Loading");

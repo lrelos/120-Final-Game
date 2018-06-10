@@ -6,9 +6,9 @@ Level1 = {
 		this.total = 0;
 		this.timer;
    		this.timeText;
-		this.bronzeTime = 42;
-		this.silverTime = 35;
-		this.goldTime = 27;
+		this.bronzeTime = 90;
+		this.silverTime = 60;
+		this.goldTime = 40;
 		this.stars = 0;
 
 		// Plays Background Music
@@ -134,7 +134,7 @@ Level1 = {
 		// show timer01 debug text
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
 		game.debug.text('Stars: ' + this.stars, 50, 50, "#FFFFFF", '72px');
-		this.dashBar.scale.x = dash*(1/90);
+		this.dashBar.scale.x = this.player.getDashScale();
 	},
 
 	// updates the time
