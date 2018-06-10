@@ -29,7 +29,7 @@ Level6 = {
 
 	    // creates the tile map
 		lvl6Map = game.add.tilemap('Level6');
-		lvl6Map.addTilesetImage('metal', 'metalTiles');
+		lvl6Map.addTilesetImage('metal', 'metalTiles2');
 
 		// sets collision by exclusion. Player will collide with everything except these numbers
 		lvl6Map.setCollisionByExclusion([0], true);
