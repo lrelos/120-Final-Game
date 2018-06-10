@@ -6,9 +6,9 @@ Level1 = {
 		this.total = 0;
 		this.timer;
    		this.timeText;
-		this.bronzeTime = 120;
-		this.silverTime = 90;
-		this.goldTime = 60;
+		this.bronzeTime = 42;
+		this.silverTime = 35;
+		this.goldTime = 27;
 		this.stars = 0;
 
 		// Plays Background Music
@@ -22,6 +22,7 @@ Level1 = {
         timer.start();
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+		game.physics.arcade.TILE_BIAS = 32;  // prevents tunneling through floor when falling
 
 		// adds the background image. Separate from tile
 	    this.background = game.add.tileSprite(0, 0, 5500, 3093, 'lvl1Background');
@@ -86,6 +87,7 @@ Level1 = {
         	game.add.existing(this.player);
         	//Phaser.Camera.FOLLOW_PLATFORMER = 1;
         	game.camera.follow(this.player);
+        	lvl1Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
  		}
 
 		function collectScroll(player, scroll) {

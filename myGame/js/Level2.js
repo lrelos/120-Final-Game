@@ -6,13 +6,13 @@ Level2 = {
 		this.total = 0;
 		this.timer;
    		this.timeText;
-		this.bronzeTime = 90;
-		this.silverTime = 60;
+		this.bronzeTime = 70;
+		this.silverTime = 45;
 		this.goldTime = 30;
 		this.stars = 0;
 
 		// Plays Background Music
-        this.music = this.add.audio('bgMusic1');
+        this.music = this.add.audio('bgMusic2');
         this.music.play();
         this.music.loop;
 
@@ -91,6 +91,7 @@ Level2 = {
         	game.add.existing(this.player);
         	//Phaser.Camera.FOLLOW_PLATFORMER = 1;
         	game.camera.follow(this.player);
+        	lvl2Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
  		}
 
  		// function when player collects scroll

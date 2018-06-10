@@ -8,7 +8,7 @@ Level3 = {
    		this.timeText;
 		this.bronzeTime = 150;
 		this.silverTime = 100;
-		this.goldTime = 70;
+		this.goldTime = 75;
 		this.stars = 0;
 
 		// Plays Background Music

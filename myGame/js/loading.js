@@ -38,6 +38,13 @@
 		game.load.image('rideblocks', '../level3/metalMid.png');
 		game.load.tilemap('Level3', '../level3/Level3.json', null, Phaser.Tilemap.TILED_JSON);
 
+		// load level 6 assts
+		game.load.image('metalTiles', '../level6/sheet.png');
+		//game.load.image('lvl2Background', '../level2/DesertBackground.png');
+		game.load.spritesheet('hazards', '../level6/electric_hazard.png', 144, 22);
+		game.load.spritesheet('hazards2', '../level6/electric_hazard_2.png', 35, 232);
+		game.load.tilemap('Level6', '../level6/Level6.json', null, Phaser.Tilemap.TILED_JSON);
+
 
 		// load all audio
 		game.load.audio('bgMusic1', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
@@ -45,6 +52,7 @@
 		game.load.audio('bgMusic3', ['../audio/Ninja_Background_3.mp3'], ['../audio.Ninja_Background_3.ogg']);
 		game.load.audio('bgMusic4', ['../audio/Ninja_Background_4.mp3'], ['../audio.Ninja_Background_4.ogg']);
 		game.load.audio('dashSnd', ['../audio/Dash.mp3'], ['../audio.Dash.ogg']);
+		game.load.audio('pickUpScroll', ['../audio/item_pickup.mp3'], ['../audio.item_pickup.ogg']);
 
 
 
