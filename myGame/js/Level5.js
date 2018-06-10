@@ -181,7 +181,7 @@ Level5 = {
 		// show timer01 debug text
 		game.debug.text('Time Elapsed: ' + this.total, 32, 32, "#ff3333", '40px');
 		game.debug.text('Stars: ' + this.stars, 50, 50, "#FFFFFF", '72px');
-		this.dashBar.scale.x = dash*(1/90);
+		this.dashBar.scale.x = this.player.getDashScale();
 	},
 
 	// updates the time
