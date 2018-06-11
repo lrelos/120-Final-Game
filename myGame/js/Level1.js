@@ -67,6 +67,9 @@ Level1 = {
 			flag.animations.play('flagWave');
 		});
 
+		// Keeps friction constant
+    	frictionDragX = 2500;
+
 	},
 
 	update: function() {

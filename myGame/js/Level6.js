@@ -120,8 +120,8 @@ Level6 = {
 		this.dashBar.scale.y = 0.5;
 		this.dashBar.fixedToCamera = true;
 
-		//changes friction for ice level for slippery terrain
-		frictionDragX = 2500;
+    	// Keeps friction constant
+    	frictionDragX = 2500;
 
 	},
 

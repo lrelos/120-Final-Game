@@ -118,6 +118,9 @@ Level4 = {
 			hazard4.animations.play('electricity4');
     	});
 
+    	// keeps friction constant for this level
+    	frictionDragX = 2500;
+
 	},
 
 	update: function() {
