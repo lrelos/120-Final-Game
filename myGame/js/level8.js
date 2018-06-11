@@ -53,6 +53,14 @@ level8 = {
 		flag.animations.play('flagWave');
     	});
 
+		this.lavaWalls2 = game.add.group();
+		this.lavaWalls2.enableBody = true;
+		lvl8Map.createFromObjects('Hazard', 'lava2', 'lavaWalls', 0, true, false, this.lavaWalls2);
+
+		this.lavaWalls3 = game.add.group();
+		this.lavaWalls3.enableBody = true;
+		lvl8Map.createFromObjects('Hazard', 'lava3', 'lavaWalls', 0, true, false, this.lavaWalls2);
+
 		// creates new player for this level
 		this.player = new Player(game, 127, 700); 
         game.add.existing(this.player);
@@ -67,12 +75,14 @@ level8 = {
 
 	update: function() {
 		game.physics.arcade.collide(this.player, lvl8Layer3);
-		game.physics.arcade.overlap(this.player, lvl8Layer5, destroyPlayer1, null, this);
-		game.physics.arcade.overlap(this.player, lvl8Layer4, destroyPlayer2, null, this);
-		game.physics.arcade.overlap(this.player, lvl8Layer6, destroyPlayer3, null, this);
+		game.physics.arcade.collide(this.player, lvl8Layer4, destroyPlayer1, null, this);
+		game.physics.arcade.collide(this.player, lvl8Layer5, destroyPlayer2, null, this);
+		game.physics.arcade.collide(this.player, lvl8Layer6, destroyPlayer3, null, this);
 
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
 		game.physics.arcade.overlap(this.player, this.flags, reachFlag, null, this);
+		game.physics.arcade.overlap(this.player, this.lavaWalls2, destroyPlayer2, null, this);
+		game.physics.arcade.overlap(this.player, this.lavaWalls3, destroyPlayer3, null, this);
 
 		if (this.player.body.y > (game.world.height + this.player.body.height/2)) {
 			this.player.body.x = 1040;
@@ -82,6 +92,7 @@ level8 = {
 
         function destroyPlayer1(player){
         	if (!invincible){
+        		console.log('destroyPlayer1');
         		this.player.body.x = 128;
         		this.player.body.y = 720;
         		lvl8Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
@@ -90,6 +101,7 @@ level8 = {
 
         function destroyPlayer2(player){
         	if (!invincible){
+        		console.log('destroyPlayer2');
         		this.player.body.x = 2064;
         		this.player.body.y = 310;
         		lvl8Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
@@ -98,6 +110,7 @@ level8 = {
 
         function destroyPlayer3(player){
         	if (!invincible){
+        		console.log('destroyPlayer3');
         		this.player.body.x = 1230;
         		this.player.body.y = 310;
         		lvl8Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);

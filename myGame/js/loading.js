@@ -70,6 +70,7 @@
 		//load level 8 assets
 		game.load.image('factoryTiles', '../level8/factoryTileset.png');
 		game.load.image('lavaTiles', '../level8/lava.png');
+		game.load.image('lavaWalls', '../level8/lavaWall.png');
 		game.load.tilemap('level8', '../level8/level8.json', null, Phaser.Tilemap.TILED_JSON);
 
 
