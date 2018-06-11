@@ -36,6 +36,6 @@ game.state.add("lvl3", Level1);
 game.state.add("lvl4", Level5);
 game.state.add("lvl5", Level4);
 game.state.add("lvl6", Level6);
-game.state.add("lvl7", Level3);
-game.state.add('lvl8', level8);
+game.state.add("lvl7", level8);
+game.state.add('lvl8', Level3);
 game.state.start("Boot");

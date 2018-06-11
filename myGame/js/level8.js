@@ -5,7 +5,7 @@ level8 = {
 		this.timeText;
 		this.bronzeTime = 90;
 		this.silverTime = 50;
-		this.goldTime = 30;
+		this.goldTime = 35;
 		this.stars = 0;
 
 		this.music = this.add.audio('bgMusic2');
@@ -135,6 +135,12 @@ level8 = {
 			this.stars = 1;
 		}
 		else this.stars = 0;
+
+		if (game.input.keyboard.isDown(Phaser.Keyboard.J)){
+			timer.stop();
+			this.music.stop();
+			game.state.start('LevelSelect');
+		}
 
 		function reachFlag(player, flag) {
 			//stops the timer

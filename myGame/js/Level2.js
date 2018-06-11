@@ -70,7 +70,7 @@ Level2 = {
 
     	// Keeps friction constant
     	frictionDragX = 2500;
-    	this.player.dash = 0;
+    	this.player.resetDash();
 
 	},
 
@@ -134,6 +134,12 @@ Level2 = {
 			this.stars = 1;
 		}
 		else this.stars = 0;
+
+		if (game.input.keyboard.isDown(Phaser.Keyboard.J)){
+			timer.stop();
+			this.music.stop();
+			game.state.start('LevelSelect');
+		}
 	},
 
 	render: function() {

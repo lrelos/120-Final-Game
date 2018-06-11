@@ -239,6 +239,12 @@ Level6 = {
 			this.stars = 1;
 		}
 		else this.stars = 0;
+
+		if (game.input.keyboard.isDown(Phaser.Keyboard.J)){
+			timer.stop();
+			this.music.stop();
+			game.state.start('LevelSelect');
+		}
 		
 	},
 

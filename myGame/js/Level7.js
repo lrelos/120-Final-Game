@@ -113,6 +113,12 @@ Level7 = {
 		}
 		else this.stars = 0;
 
+		if (game.input.keyboard.isDown(Phaser.Keyboard.J)){
+			timer.stop();
+			this.music.stop();
+			game.state.start('LevelSelect');
+		}
+
 		function reachFlag(player, flag) {
 			//stops the timer
 			timer.stop();
