@@ -16,6 +16,11 @@
         game.load.spritesheet('flags', 'flag.png', 70, 70);
         game.load.image('menuBackground', 'MenuBackground.png')
         game.load.image('titleScreen', 'titleScreen.png');
+        game.load.image('menuPlay', 'titleScreenPlay.png');
+        game.load.image('menuCredits', 'titleScreenCredits.png');
+        game.load.image('menuControls', 'titleScreenControls.png');
+        game.load.image('back', 'backToTitleScreen.png');
+        game.load.image('controls', 'controls.png');
 		game.load.spritesheet("level_arrows", "level_arrows.png", 48, 48);
 		game.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
 		game.load.image('Mnt', 'Mnt.png');
@@ -43,6 +48,11 @@
 		game.load.image('metalTiles', '../level4/sheet.png');
 		game.load.image('lvl4Background', '../level4/bulkhead-wallsx3.png');
 		game.load.tilemap('Level4', '../level4/Level4.json', null, Phaser.Tilemap.TILED_JSON);
+		
+		// load level 5 assets
+		game.load.image('purpleTiles', '../level5/sheet.png');
+		game.load.image('lvl5Background', '../level5/Flat Night 2 BG.png');
+		game.load.tilemap('Level5', '../level5/Level5.json', null, Phaser.Tilemap.TILED_JSON);
 
 		// load level 6 assts
 		game.load.image('metalTiles2', '../level6/sheet.png');
