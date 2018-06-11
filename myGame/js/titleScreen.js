@@ -17,7 +17,7 @@ titleScreen = {
 	},
 
 	creditsClicked: function(button){
-		game.state.start('Credits', true, false);
+		game.state.start('credits', true, false);
 	},
 
 	controlsClicked: function(button){
