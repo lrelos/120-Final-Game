@@ -67,6 +67,11 @@
 		game.load.image('spikes', '../level7/SpikesAnim.png');
 		game.load.tilemap('level7', '../level7/rockyRoad.json', null, Phaser.Tilemap.TILED_JSON);
 
+		//load level 8 assets
+		game.load.image('factoryTiles', '../level8/factoryTileset.png');
+		game.load.image('lavaTiles', '../level8/lava.png');
+		game.load.tilemap('level8', '../level8/level8.json', null, Phaser.Tilemap.TILED_JSON);
+
 
 		// load all audio
 		game.load.audio('bgMusic1', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
