@@ -5,7 +5,7 @@ level8 = {
 		this.timeText;
 		this.bronzeTime = 90;
 		this.silverTime = 50;
-		this.goldTime = 35;
+		this.goldTime = 32;
 		this.stars = 0;
 
 		this.music = this.add.audio('bgMusic2');
@@ -92,7 +92,6 @@ level8 = {
 
         function destroyPlayer1(player){
         	if (!invincible){
-        		console.log('destroyPlayer1');
         		this.player.body.x = 128;
         		this.player.body.y = 720;
         		lvl8Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
@@ -101,7 +100,6 @@ level8 = {
 
         function destroyPlayer2(player){
         	if (!invincible){
-        		console.log('destroyPlayer2');
         		this.player.body.x = 2064;
         		this.player.body.y = 310;
         		lvl8Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
@@ -110,7 +108,6 @@ level8 = {
 
         function destroyPlayer3(player){
         	if (!invincible){
-        		console.log('destroyPlayer3');
         		this.player.body.x = 1230;
         		this.player.body.y = 310;
         		lvl8Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
