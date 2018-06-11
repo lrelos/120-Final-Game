@@ -23,10 +23,7 @@
         game.load.image('controls', 'controls.png');
         game.load.image('credits', 'credits.png');
 		game.load.spritesheet("level_arrows", "level_arrows.png", 48, 48);
-		game.load.atlas('atlas', 'PHSpritesheet.png', 'PHsprites.json');
-		game.load.image('Mnt', 'Mnt.png');
 	    game.load.atlas('ninja', 'ninja.png', 'ninja.json');
-		game.load.atlas('ground', 'ground.png', 'ground.json');
 
     // load level 1 assets
 		game.load.image('tutorial', '../level1/NatureSheet.png');
