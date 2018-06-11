@@ -13,8 +13,7 @@ Level2 = {
 
 		// Plays Background Music
         this.music = this.add.audio('bgMusic2');
-        this.music.play();
-        this.music.loop;
+        this.music.loopFull();
 
         //creates timer object
         timer = this.time.create(false);
