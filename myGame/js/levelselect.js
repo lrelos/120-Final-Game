@@ -23,7 +23,7 @@ levelSelect = {
 			currentPage = pages-1;
 		}
 		// left arrow button, to turn one page left
-		leftArrow = game.add.button(game.width * 0.25, game.height - 100,"level_arrows",this.arrowClicked,this);
+		/*leftArrow = game.add.button(game.width * 0.25, game.height - 100,"level_arrows",this.arrowClicked,this);
 		leftArrow.anchor.setTo(0.5);
 		leftArrow.frame = 0;
 		// can we turn one page left?
@@ -37,7 +37,7 @@ levelSelect = {
 		// can we turn one page right?
 		if(currentPage==pages-1){
 			rightArrow.alpha = 0.3;
-		}
+		}*/
 		// creation of the thumbails group
 		levelThumbsGroup = game.add.group();
 		// determining level thumbnails width and height for each page
@@ -79,6 +79,11 @@ levelSelect = {
 		}
 		// scrolling thumbnails group according to level position
 		levelThumbsGroup.x = currentPage * game.width * -1
+
+		var back = game.add.button(game.width/2, game.height - 130, "back", this.backClicked, this);
+		back.anchor.setTo(0.5);
+		back.scale.x = 0.8;
+		back.scale.y = 0.8;
 	},
 	arrowClicked:function(button){
 		// touching right arrow and still not reached last page
@@ -135,5 +140,9 @@ levelSelect = {
 			}, 20, Phaser.Easing.Cubic.None);
 			buttonTween.start();
 		}
+	},
+
+	backClicked: function(button){
+		game.state.start("titleScreen");
 	}
 } 

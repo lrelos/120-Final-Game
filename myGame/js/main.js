@@ -309,6 +309,7 @@ Inputs.gameover.prototype = {
 
 game.state.add("Loading", loading);
 game.state.add("titleScreen", titleScreen);
+game.state.add('controls', controls);
 game.state.add("LevelSelect", levelSelect);
 game.state.add("lvl1", Level1);	//"lvl1", Inputs.play
 game.state.add("gameover", Inputs.gameover);
