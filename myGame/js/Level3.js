@@ -108,7 +108,7 @@ Level3 = {
 		game.physics.arcade.overlap(this.player, this.iceSpikes, killPlayer, null, this);
 
 		this.iceSpikes.forEach(function(iceSpike){
-			if((Math.random() * 400) < 0.5 ) {
+			if((Math.random() * 250) < 0.5 ) {
         		iceSpike.body.velocity.y = Phaser.Math.between(150, 225);
         	if(iceSpike.body.y >= 3500) {
         		iceSpike.body.velocity.y = 0;
@@ -118,7 +118,7 @@ Level3 = {
     	});		
 
     	function killPlayer(player, iceSpike) {
-    		if(invincible == false && (iceSpike.body.y + 30 < player.body.y)) {
+    		if(invincible == false && (iceSpike.body.y + 28 < player.body.y)) {
     			this.player.body.x = 600;
 				this.player.body.y = 3260;
 			}

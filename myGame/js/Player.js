@@ -115,12 +115,12 @@ Player.prototype.update = function() {
         // Checks if player is in Air, holding right against all to the right,
         // and if player is blocked wall
         if(inAir){
-            if ((this.body.blocked.right || this.body.touching.right) && game.time.time > timeAfterJump) {
+            if ((this.body.blocked.right) && game.time.time > timeAfterJump) {
         	    this.animations.stop();
                 this.body.drag.y = frictionDragY;
                 wallJumpRight = true;
                 this.frameName = 'wallCling'
-            } else if((this.body.blocked.left || this.body.touching.left) && game.time.time > timeAfterJump) {
+            } else if((this.body.blocked.left) && game.time.time > timeAfterJump) {
         	   this.animations.stop();
                this.body.drag.y = frictionDragY;
                 wallJumpLeft = true;
