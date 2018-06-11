@@ -9,8 +9,7 @@ Level7 = {
 		this.stars = 0;
 
 		this.music = this.add.audio('bgMusic1');
-		this.music.play();
-		this.music.loop;
+		this.music.loopFull();
 
 		timer = this.time.create(false);
 		timer.loop(1000, this.updateTime, this);

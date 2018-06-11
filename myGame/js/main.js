@@ -12,7 +12,7 @@ var stars = 0;
 var numOfLevels = 2;
 var dashSound;
 var frictionDragX = 2500;
-var frictionDragY = 1250;
+var frictionDragY = 900;
 
 //global vars for level select menu
 game.global = {
@@ -307,6 +307,7 @@ Inputs.gameover.prototype = {
 }
 
 
+game.state.add("Boot", Boot);
 game.state.add("Loading", loading);
 game.state.add("titleScreen", titleScreen);
 game.state.add('controls', controls);
@@ -320,5 +321,4 @@ game.state.add("lvl4", Level4);
 game.state.add("lvl5", Level5);
 game.state.add("lvl6", Level6);
 game.state.add("lvl7", Level7);
-game.state.add('lvl8', level8);
-game.state.start("Loading");
+game.state.start("Boot");

@@ -13,8 +13,7 @@ Level6 = {
 
 		// Plays Background Music
         this.music = this.add.audio('bgMusic2');
-        this.music.play();
-        this.music.loop;
+        this.music.loopFull();
 
         //creates timer object
         timer = this.time.create(false);
@@ -163,7 +162,6 @@ Level6 = {
 			if (invincible == false) {
 				this.player.body.x = 300;
 				this.player.body.y = 2525;
-				lvl6Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
 			}
 		}
 
@@ -172,7 +170,6 @@ Level6 = {
 			if (invincible == false) {
 				this.player.body.x = 3910;
 				this.player.body.y = 2165;
-				lvl6Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
 			}
 		}
 
@@ -181,7 +178,6 @@ Level6 = {
 			if (invincible == false) {
 				this.player.body.x = 220;
 				this.player.body.y = 1800;
-				lvl6Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
 			}
 		}
 		
