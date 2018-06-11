@@ -3,14 +3,13 @@ level8 = {
 		this.total = 0;
 		this.timer;
 		this.timeText;
-		this.bronzeTime = 300;
-		this.silverTime = 299;
-		this.goldTime = 298;
+		this.bronzeTime = 90;
+		this.silverTime = 50;
+		this.goldTime = 30;
 		this.stars = 0;
 
 		this.music = this.add.audio('bgMusic2');
-		this.music.play();
-		this.music.loop;
+		this.music.loopFull();
 
 		timer = this.time.create(false);
 		timer.loop(1000, this.updateTime, this);
