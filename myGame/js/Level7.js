@@ -59,6 +59,9 @@ Level7 = {
 		this.dashBar = this.add.sprite(20, 60, 'dashBar');
 		this.dashBar.scale.y = 0.5;
 		this.dashBar.fixedToCamera = true;
+
+		// Keeps friction constant
+    	frictionDragX = 2500;
 	},
 
 	update: function() {

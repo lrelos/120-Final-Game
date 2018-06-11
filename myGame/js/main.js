@@ -12,7 +12,7 @@ var stars = 0;
 var numOfLevels = 2;
 var dashSound;
 var frictionDragX = 2500;
-var frictionDragY = 900;
+var frictionDragY = 950;
 
 //global vars for level select menu
 game.global = {
