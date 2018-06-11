@@ -138,6 +138,7 @@ Level4 = {
         	game.add.existing(this.player);
         	//Phaser.Camera.FOLLOW_PLATFORMER = 1;
         	game.camera.follow(this.player);
+        	lvl4Map.createFromObjects('Items', 'scroll', 'scrolls', 0, true, false, this.dashScrolls);
  		}
 
 		function collectScroll(player, scroll) {

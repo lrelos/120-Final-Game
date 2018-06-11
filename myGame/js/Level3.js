@@ -11,8 +11,6 @@ Level3 = {
 		this.goldTime = 75;
 		this.stars = 0;
 
-		this.iceSpikeX = 0;
-		this.iceSpikeY = 0;
 
 		// Plays Background Music
         this.music = this.add.audio('bgMusic3');
@@ -110,17 +108,17 @@ Level3 = {
 		game.physics.arcade.overlap(this.player, this.iceSpikes, killPlayer, null, this);
 
 		this.iceSpikes.forEach(function(iceSpike){
-			if((Math.random() * 500) < 0.5 ) {
-        		iceSpike.body.velocity.y = 175;
+			if((Math.random() * 400) < 0.5 ) {
+        		iceSpike.body.velocity.y = Phaser.Math.between(150, 225);
         	if(iceSpike.body.y >= 3500) {
         		iceSpike.body.velocity.y = 0;
-				iceSpike.body.y = 3135;
+				iceSpike.body.y = Phaser.Math.between(3120, 3133);;
         	}
         }
     	});		
 
-    	function killPlayer(player, icespike) {
-    		if(invincible == false) {
+    	function killPlayer(player, iceSpike) {
+    		if(invincible == false && (iceSpike.body.y + 30 < player.body.y)) {
     			this.player.body.x = 600;
 				this.player.body.y = 3260;
 			}
