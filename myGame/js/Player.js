@@ -36,6 +36,8 @@ function Player(game, x, y, frame) {
 
     this.dashSound = game.add.audio('dashSnd');
 
+    dash = 0;
+
     
 }
 
