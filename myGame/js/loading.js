@@ -36,6 +36,7 @@
 		game.load.image('iceTiles', '../level3/sheet.png');
 		game.load.image('lvl3Background', '../level3/TundraBackground.png');
 		game.load.image('rideblocks', '../level3/metalMid.png');
+		game.load.image('icicles', '../level3/iceSpike.png');
 		game.load.tilemap('Level3', '../level3/Level3.json', null, Phaser.Tilemap.TILED_JSON);
 		
 		// load level 4 assets
@@ -60,7 +61,6 @@
 		game.load.audio('bgMusic1', ['../audio/Ninja_Background.mp3'], ['../audio.Ninja_Background.ogg']);
 		game.load.audio('bgMusic2', ['../audio/Ninja_Background_2.mp3'], ['../audio.Ninja_Background_2.ogg']);
 		game.load.audio('bgMusic3', ['../audio/Ninja_Background_3.mp3'], ['../audio.Ninja_Background_3.ogg']);
-		game.load.audio('bgMusic4', ['../audio/Ninja_Background_4.mp3'], ['../audio.Ninja_Background_4.ogg']);
 		game.load.audio('dashSnd', ['../audio/Dash.mp3'], ['../audio.Dash.ogg']);
 		game.load.audio('pickUpScroll', ['../audio/item_pickup.mp3'], ['../audio.item_pickup.ogg']);
 

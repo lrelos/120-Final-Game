@@ -11,8 +11,11 @@ Level3 = {
 		this.goldTime = 75;
 		this.stars = 0;
 
+		this.iceSpikeX = 0;
+		this.iceSpikeY = 0;
+
 		// Plays Background Music
-        this.music = this.add.audio('bgMusic4');
+        this.music = this.add.audio('bgMusic3');
         this.music.play();
         this.music.loop;
 
@@ -58,6 +61,15 @@ Level3 = {
         rideBlock.body.velocity.y = -100;
     	});
 
+    	// Creates spikes of ice for this levels
+		this.iceSpikes = game.add.group();
+		this.iceSpikes.enableBody = true;
+		lvl3Map.createFromObjects('Items', 'iceSpike', 'icicles', 0, true, false, this.iceSpikes);
+		// sets attributes for  icicles
+		this.iceSpikes.forEach(function(iceSpike){
+        iceSpike.body.immovable = true;
+    	});
+
     	// Creates flags to reach for win condition
 		this.flags = game.add.group();
 		this.flags.enableBody = true;
@@ -95,7 +107,24 @@ Level3 = {
 		game.physics.arcade.overlap(this.player, this.dashScrolls, collectScroll, null, this);
 		// adds overlap for player and flag
 		game.physics.arcade.overlap(this.player, this.flags, reachFlag, null, this);
+		game.physics.arcade.overlap(this.player, this.iceSpikes, killPlayer, null, this);
 
+		this.iceSpikes.forEach(function(iceSpike){
+			if((Math.random() * 500) < 0.5 ) {
+        		iceSpike.body.velocity.y = 175;
+        	if(iceSpike.body.y >= 3500) {
+        		iceSpike.body.velocity.y = 0;
+				iceSpike.body.y = 3135;
+        	}
+        }
+    	});		
+
+    	function killPlayer(player, icespike) {
+    		if(invincible == false) {
+    			this.player.body.x = 600;
+				this.player.body.y = 3260;
+			}
+    	}
 
 		// kills and resets player if they fall off the world
 		if (this.player.body.y > (game.world.height + this.player.body.height/2)) {
