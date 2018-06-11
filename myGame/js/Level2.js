@@ -70,6 +70,7 @@ Level2 = {
 
     	// Keeps friction constant
     	frictionDragX = 2500;
+    	this.player.dash = 0;
 
 	},
 

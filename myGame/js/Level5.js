@@ -117,6 +117,7 @@ Level5 = {
         	hazard4.animations.add('electricity4', [0, 1, 2, 3], 4, true);
 			hazard4.animations.play('electricity4');
     	});
+    	this.player.resetDash();
 
 	},
 

@@ -93,6 +93,8 @@ Level3 = {
 		//changes friction for ice level for slippery terrain
 		frictionDragX = 250;
 
+		this.player.resetDash();
+
 	},
 
 	update: function() {

@@ -332,3 +332,7 @@ Player.prototype.update = function() {
 Player.prototype.getDashScale = function() {
     return dash/180;
 }
+
+Player.prototype.resetDash = function() {
+    dash = 0;
+}

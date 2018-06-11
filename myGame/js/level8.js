@@ -66,6 +66,7 @@ level8 = {
         game.add.existing(this.player);
         //Phaser.Camera.FOLLOW_PLATFORMER = 1;
         game.camera.follow(this.player);
+        this.player.resetDash();
 
         // adds the dash bar
 		this.dashBar = this.add.sprite(20, 60, 'dashBar');

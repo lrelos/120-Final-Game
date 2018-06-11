@@ -122,7 +122,7 @@ Level6 = {
 
     	// Keeps friction constant
     	frictionDragX = 2500;
-
+    	this.player.resetDash();
 	},
 
 	update: function() {
